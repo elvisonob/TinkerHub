@@ -1,3 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .calculator {
     display: grid;
+    grid-template: 'top1 top1 top1 top1 ' 20px 'top2 top2 top2 top2' 20px '. divide C Backspace' 20px '7 8 9 multiply' 50px '4 5 6 minus' 50px '1  2 3 plus' 50px '% 0 . equalTo' 50px/ 100px 100px 100px 100px;
+}
+
+.top1 {
+    background-color: red;
+    grid-area: top1;
+}
+
+.top2 {
+    grid-area: top2;
+}
+
+.divide {
+    grid-area: divide;
+}
+
+.C {
+    grid-area: C;
+}
+
+.Backspace {
+    grid-area: Backspace;
+}
+
+.seven {
+    grid-area: seven;
+}
+
+.eight {
+    grid-area: eight;
+}
+
+.nine {
+    grid-area: nine;
+}
+
+.multiply {
+    grid-area: multiply;
+}
+
+.four {
+    grid-area: four;
+}
+
+.five {
+    grid-area: five;
+}
+
+.six {
+    grid-area: six;
+}
+
+.minus {
+    grid-area: minus;
+}
+
+.one {
+    grid-area: one;
+}
+
+.two {
+    grid-area: two;
+}
+
+.three {
+    grid-area: three;
+}
+
+.plus {
+    grid-area: plus;
+}
+
+.percentage {
+    grid-area: percentage;
+}
+
+.zero {
+    grid-area: 0;
+}
+
+.dot {
+    grid-area: dot;
+}
+
+.equalTo {
+    background-color: green;
+    grid-area: equalTo;
 }
