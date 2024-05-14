@@ -55,101 +55,140 @@
 
 .one {
   grid-area: 'one';
-  border: 1px solid black;
-  justify-content: center;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .two {
   grid-area: 'two';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .three {
   grid-area: 'three';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .four {
   grid-area: 'four';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .five {
   grid-area: 'five';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .six {
   grid-area: 'six';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .seven {
   grid-area: 'seven';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .eight {
   grid-area: 'eight';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .nine {
   grid-area: 'nine';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .plus {
   grid-area: 'plus';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .minus {
   grid-area: 'minus';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .divide {
   grid-area: 'divide';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .equalTo {
   grid-area: 'equalTo';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .multiply {
   grid-area: 'multiply';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .backspace {
   grid-area: 'backspace';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 10px;
 }
 
 .empty {
   grid-area: 'empty';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 15px;
 }
 
 .C {
   grid-area: 'C';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .zero {
   grid-area: 'zero';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .dot {
   grid-area: 'dot';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
 
 .percent {
   grid-area: 'dot';
-  border: 1px solid black;
+  border: 2px solid black;
+  justify-self: center;
+  padding: 20px;
 }
