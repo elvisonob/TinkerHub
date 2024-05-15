@@ -1,11 +1,28 @@
+import React, { useState } from 'react';
+
 const Digits = () => {
+  // when each of the below number is clicked, I would like it to show up
+  // in the top2 screen page
+
+  // so this means I take it from digits page after been clicked to
+  //App.js digit page.
+
+  // Next action
+  // how do i capture the 'numbers'?
+
+  const [options, setOptions] = useState('');
+
+  const onNumberClick = (newNumber) => {
+    setOptions(newNumber);
+  };
+
   return (
     <div className=" numbersAndOperandsDisplay">
       <div className="empty">CE</div>
       <div className="divide">/</div>
       <div className="C">C</div>
       <div className="backspace">Back</div>
-      <div className="seven" numbers="7">
+      <div className="seven" numbers="7" onClick={onNumberClick}>
         7
       </div>
       <div className="eight" numbers="8">
