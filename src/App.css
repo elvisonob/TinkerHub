@@ -1,194 +1,26 @@
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-.calculator {
-  /* display: grid; */
-  grid-template-rows: 50px 1fr;
-  margin-left: 500px;
-  margin-right: 500px;
-  margin-top: 30px;
-  justify-self: center;
-  width: fit-content;
+body {
+  margin: 0;
+  background: linear-gradient(to right, #00aaff, #00ff6c);
 }
 
-.calculatorProper {
+.calculator-grid {
   display: grid;
-  grid-template-rows: 100px 1fr;
-  border: 1px solid black;
+  margin-top: 2rem;
+  grid-template-columns: repeat(4, 6rem);
+  grid-template-rows: minmax(7rem, auto) repeat(5, 6rem);
 }
 
-.inputDisplay {
-  display: grid;
-  border: 1px solid black;
-  grid-template-rows: 1fr 1fr;
-  border: 1px dotted black;
-  justify-content: flex-end;
-  padding: 10px;
-  grid-gap: 5px;
-  background-color: black;
-  color: white;
+.span-two {
+  grid-column: span 2;
 }
 
-.top1 {
-  margin-top: 10px;
-  border: 1px dotted black;
-}
-
-.top2 {
-  border: 1px dotted black;
-  margin-top: 30px;
-}
-
-.numbersAndOperandsDisplay {
-  display: grid;
-  border: 1px solid black;
-  grid-template: 'empty divide C backspace' 50px 'seven eight nine multiply' 50px 'four five six minus' 50px 'one two three plus' 50px 'percentage zero dot equalTo' 50px / 50px 50px 50px 50px;
-  grid-gap: 40px;
-  padding: 5px;
-  background-color: aquamarine;
-  color: black;
-  padding: 20px;
-}
-
-.one {
-  grid-area: 'one';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.two {
-  grid-area: 'two';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.three {
-  grid-area: 'three';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.four {
-  grid-area: 'four';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.five {
-  grid-area: 'five';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.six {
-  grid-area: 'six';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.seven {
-  grid-area: 'seven';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.eight {
-  grid-area: 'eight';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.nine {
-  grid-area: 'nine';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.plus {
-  grid-area: 'plus';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.minus {
-  grid-area: 'minus';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.divide {
-  grid-area: 'divide';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.equalTo {
-  grid-area: 'equalTo';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.multiply {
-  grid-area: 'multiply';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.backspace {
-  grid-area: 'backspace';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 10px;
-}
-
-.empty {
-  grid-area: 'empty';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 15px;
-}
-
-.C {
-  grid-area: 'C';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.zero {
-  grid-area: 'zero';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.dot {
-  grid-area: 'dot';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
-}
-
-.percent {
-  grid-area: 'dot';
-  border: 2px solid black;
-  justify-self: center;
-  padding: 20px;
+.output {
+  grid-column: 1/-1;
+  background-color: rgba(0, 0, 0, 0.75);
 }
