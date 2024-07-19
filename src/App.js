@@ -1,35 +1,33 @@
 import { useReducer } from 'react';
 
+const reducerFn = (state, { type, payload }) => {
+  switch (type) {
+    case 'addName':
+      return { ...state, name: payload };
+
+    case 'addLocation':
+      return { ...state, location: payload };
+
+    case 'submit':
+      console.log(state.name, state.location);
+      return { name: '', location: '' };
+
+    default:
+      return state;
+  }
+};
+
 const App = () => {
-  const reducerFn = (state, { type, payload }) => {
-    //take the content written in a form and console log it
-
-    switch (type) {
-      case 'addInput':
-        return { ...state, name: payload };
-
-      case 'addLocation':
-        return { ...state, location: payload };
-
-      case 'submit':
-        console.log(state.name, state.location);
-        return { ...state, name: '', location: '' };
-
-      default:
-        return state;
-    }
-  };
-
   const [state, dispatch] = useReducer(reducerFn, {
     name: '',
     location: '',
   });
 
-  const onNameInput = (e) => {
-    dispatch({ type: 'addInput', payload: e.target.value });
+  const onHandleName = (e) => {
+    dispatch({ type: 'addName', payload: e.target.value });
   };
 
-  const onLocationInput = (e) => {
+  const onHandleLocation = (e) => {
     dispatch({ type: 'addLocation', payload: e.target.value });
   };
 
@@ -47,7 +45,7 @@ const App = () => {
           type="text"
           id="name"
           password="name"
-          onChange={onNameInput}
+          onChange={onHandleName}
           value={state.name}
         />
         <label>Location:</label>
@@ -55,7 +53,7 @@ const App = () => {
           type="text"
           id="location"
           name="location"
-          onChange={onLocationInput}
+          onChange={onHandleLocation}
           value={state.location}
         />
         <button>Submit</button>
