@@ -4,21 +4,38 @@ import { useReducer } from 'react';
 import Digits from './Digits';
 import OperationDigits from './OperationDigits';
 
-const reducerFn = (
-  //First task is to ensure that each clicked word appears in the calculator display page
-  //now, i need to make the digits reusable
-  //now, i need to implement the dispatch in the reusable
-  //now, do the operation digits
-  // if the inputs are blank, do not show any operator
-  state,
-  { type, payload }
-) => {
+const reducerFn = (state, { type, payload }) => {
   switch (type) {
     case 'addFigure':
-      return { ...state, currentOperand: `${payload}` };
+      // when blank, do not show operator!!
+
+      if (state.currentOperand === '0') {
+        return {
+          currentOperand: `${state.currentOperand}`,
+        };
+      }
+
+      if (state.previousOperand) {
+        return {
+          ...state,
+          currentOperand: `${state.currentOperand}${payload}`,
+        };
+      }
+
+      return { currentOperand: `${state.currentOperand}${payload}` };
 
     case 'addOperation':
+      if (state.currentOperand) {
+        return {
+          previousOperand: `${state.currentOperand}${payload}`,
+
+          currentOperand: '',
+        };
+      }
       return { operator: payload };
+
+    case 'deleteEverything':
+      return { currentOperand: '', operator: '', previousOperand: '' };
 
     default:
       return state;
@@ -32,6 +49,10 @@ const App = () => {
     previousOperand: '',
   });
 
+  const onDelete = () => {
+    dispatch({ type: 'deleteEverything' });
+  };
+
   return (
     <div className="calculator-grid">
       <div className="output">
@@ -40,7 +61,9 @@ const App = () => {
         </div>
         <div className="current-operand">{state.currentOperand}</div>
       </div>
-      <button className="span-two">AC</button>
+      <button className="span-two" onClick={onDelete}>
+        AC
+      </button>
       <button>DEL</button>
       <OperationDigits operation="/" dispatch={dispatch} />
       <Digits numbers="1" dispatch={dispatch} />
@@ -57,7 +80,7 @@ const App = () => {
       <OperationDigits operation="-" dispatch={dispatch} />
       <button>.</button>
       <Digits numbers="0" dispatch={dispatch} />
-      <OperationDigits operation="=" />
+      <button>=</button>
     </div>
   );
 };
