@@ -27,12 +27,20 @@ const reducerFn = (state, { type, payload }) => {
     case 'addOperation':
       if (state.currentOperand) {
         return {
-          previousOperand: `${state.currentOperand}${payload}`,
-
+          previousOperand: `${state.currentOperand}`,
+          operator: payload,
           currentOperand: '',
         };
       }
       return { operator: payload };
+
+    case 'onEvaluate':
+      return {
+        ...state,
+        previousOperand: null,
+        operator: null,
+        currentOperand: evaluate(state),
+      };
 
     case 'deleteEverything':
       return { currentOperand: '', operator: '', previousOperand: '' };
@@ -40,6 +48,35 @@ const reducerFn = (state, { type, payload }) => {
     default:
       return state;
   }
+};
+
+// now i need to ensure that when equal-to button is clicked, it does the arithmetic
+
+const evaluate = ({ currentOperand, operator, previousOperand }) => {
+  const prev = parseFloat(previousOperand);
+  const current = parseFloat(currentOperand);
+  if (isNaN(prev) || isNaN(current)) return '';
+  let computation = '';
+  switch (operator) {
+    case '+':
+      computation = prev + current;
+      break;
+
+    case '-':
+      computation = prev - current;
+      break;
+
+    case '/':
+      computation = prev / current;
+      break;
+
+    case '*':
+      computation = prev * current;
+      break;
+    default:
+      return '';
+  }
+  return computation.toString();
 };
 
 const App = () => {
@@ -51,6 +88,10 @@ const App = () => {
 
   const onDelete = () => {
     dispatch({ type: 'deleteEverything' });
+  };
+
+  const onEvaluate = () => {
+    dispatch({ type: 'onEvaluate' });
   };
 
   return (
@@ -80,7 +121,7 @@ const App = () => {
       <OperationDigits operation="-" dispatch={dispatch} />
       <button>.</button>
       <Digits numbers="0" dispatch={dispatch} />
-      <button>=</button>
+      <button onClick={onEvaluate}>=</button>
     </div>
   );
 };
