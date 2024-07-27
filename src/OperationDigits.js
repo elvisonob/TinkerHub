@@ -1,12 +1,10 @@
-const OperationDigits = (props) => {
+const OperationDigits = ({ dispatch, operation }) => {
   return (
     <div
       className="calculator-grid"
-      onClick={() =>
-        props.dispatch({ type: 'addOperation', payload: props.operation })
-      }
+      onClick={() => dispatch({ type: 'addOperation', payload: { operation } })}
     >
-      {props.operation}
+      {operation}
     </div>
   );
 };

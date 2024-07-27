@@ -9,41 +9,58 @@ const reducerFn = (state, { type, payload }) => {
     case 'addFigure':
       // when blank, do not show operator!!
 
-      if (state.currentOperand === '0') {
-        return {
-          currentOperand: `${state.currentOperand}`,
-        };
+      if (payload.numbers === '0' && state.currentOperand === '0') {
+        return state;
       }
+
+      //
+
+      if (state.currentOperand.includes('.') && payload.numbers === '.') {
+        return state;
+      }
+
+      // if state.currentoperand already includes '0.' and next payload is 0, include return state
 
       if (state.previousOperand !== null) {
         return {
           ...state,
-          currentOperand: `${state.currentOperand}${payload}`,
+          currentOperand: `${state.currentOperand}${payload.numbers}`,
         };
       }
 
-      return { currentOperand: `${state.currentOperand}${payload}` };
+      return {
+        ...state,
+        currentOperand: `${state.currentOperand || ''}${payload.numbers}`,
+      };
 
     case 'addOperation':
       //if all states are null, operation key shouldn't show
 
+      if (state.currentOperand === null && state.previousOperand === null) {
+        return state;
+      }
+
       //when i have all inputs and i click operator, previousOperand should evaluate
 
-      if (state.currentOperand !== null) {
-        return {
-          previousOperand: `${state.currentOperand}`,
-          operator: payload,
-          currentOperand: '',
-        };
-      }
+      // if (state.currentOperand !== null) {
+      //   return {
+      //     previousOperand: `${state.currentOperand}`,
+      //     operator: payload.operation,
+      //     currentOperand: '',
+      //   };
+      // }
 
-      if (state.currentOperand && state.operator && state.previousOperand) {
-        return {
-          ...state,
-          operator: payload,
-          previousOperand: evaluate(state),
-        };
-      }
+      // if (
+      //   state.currentOperand !== null &&
+      //   state.operator !== null &&
+      //   state.previousOperand !== null
+      // ) {
+      //   return {
+      //     ...state,
+      //     operator: payload.operation,
+      //     previousOperand: evaluate(state),
+      //   };
+      // }
 
       return state;
 
@@ -141,7 +158,7 @@ const App = () => {
       <Digits numbers="8" dispatch={dispatch} />
       <Digits numbers="9" dispatch={dispatch} />
       <OperationDigits operation="-" dispatch={dispatch} />
-      <button>.</button>
+      <Digits numbers="." dispatch={dispatch} />
       <Digits numbers="0" dispatch={dispatch} />
       <button onClick={onEvaluate}>=</button>
     </div>
