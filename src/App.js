@@ -17,9 +17,9 @@ const reducerFn = (state, { type, payload }) => {
 
       return {
         ...state,
+
         currentOperand: `${state.currentOperand || ''}${payload.numbers}`,
       };
-
     case 'addOperation':
       if (state.currentOperand == null && state.previousOperand == null) {
         return state;
@@ -35,19 +35,15 @@ const reducerFn = (state, { type, payload }) => {
       }
 
     case 'deleteEverything':
-      return {};
+      return { currentOperand: 'michael' };
 
-    // default:
-    //   return state;
+    default:
+      return state;
   }
 };
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducerFn, {
-    currentOperand: 'J',
-    operator: '',
-    previousOperand: '',
-  });
+  const [state, dispatch] = useReducer(reducerFn, {});
 
   const onDelete = () => {
     dispatch({ type: 'deleteEverything' });
@@ -56,6 +52,8 @@ const App = () => {
   const onEvaluate = () => {
     dispatch({ type: 'onEvaluate' });
   };
+
+  console.log(typeof state.previousOperand);
 
   return (
     <div className="calculator-grid">
