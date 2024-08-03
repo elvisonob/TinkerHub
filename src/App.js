@@ -34,12 +34,69 @@ const reducerFn = (state, { type, payload }) => {
         };
       }
 
+      if (state.currentOperand == null) {
+        return { ...state, operator: payload.operation };
+      }
+      return {
+        ...state,
+        previousOperand: evaluate(state),
+        operator: payload.operation,
+        currentOperand: null,
+      };
+
+    case 'onEvaluate':
+      if (
+        state.previousOperand == null ||
+        state.currentOperand == null ||
+        state.operator == null
+      ) {
+        return state;
+      }
+      return {
+        ...state,
+        previousOperand: null,
+        operation: null,
+        currentOperand: evaluate(state),
+      };
+
     case 'deleteEverything':
-      return { currentOperand: 'michael' };
+      return {};
 
     default:
       return state;
   }
+};
+
+const evaluate = ({ previousOperand, currentOperand, operator }) => {
+  const prev = parseFloat(previousOperand);
+  const curr = parseFloat(currentOperand);
+
+  if (isNaN(curr) || isNaN(prev)) return 'chains';
+
+  let computation = '';
+
+  switch (operator) {
+    case '+':
+      computation = prev + curr;
+      break;
+
+    case '-':
+      computation = prev - curr;
+      break;
+
+    case '*':
+      computation = prev * curr;
+      break;
+
+    case '/':
+      computation = prev / curr;
+      break;
+
+    default:
+  }
+
+  //will take off the string to see what happens
+  return computation.toString();
 };
 
 const App = () => {
@@ -52,8 +109,6 @@ const App = () => {
   const onEvaluate = () => {
     dispatch({ type: 'onEvaluate' });
   };
-
-  console.log(typeof state.previousOperand);
 
   return (
     <div className="calculator-grid">
