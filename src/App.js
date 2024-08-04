@@ -133,6 +133,18 @@ const evaluate = ({ previousOperand, currentOperand, operator }) => {
   return computation.toString();
 };
 
+const integerFormatter = new Intl.NumberFormat('en-us', {
+  maximumFractionDigits: 0,
+});
+
+const format = (operand) => {
+  if (operand == null) return;
+  const [integer, decimal] = operand.split('.');
+  if (decimal == null) return integerFormatter.format(integer);
+
+  return `${integerFormatter.format(integer)}.${decimal}`;
+};
+
 const App = () => {
   const [state, dispatch] = useReducer(reducerFn, {});
 
@@ -148,9 +160,9 @@ const App = () => {
     <div className="calculator-grid">
       <div className="output">
         <div className="previous-operand">
-          {state.previousOperand} {state.operator}
+          {format(state.previousOperand)} {state.operator}
         </div>
-        <div className="current-operand">{state.currentOperand}</div>
+        <div className="current-operand">{format(state.currentOperand)}</div>
       </div>
       <button className="span-two" onClick={onDelete}>
         AC
