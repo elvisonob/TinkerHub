@@ -6,7 +6,15 @@ import OperationDigits from './OperationDigits';
 
 const reducerFn = (state, { type, payload }) => {
   switch (type) {
+    // if overwrite is true, when we add a new payload.number, it should start afresh
     case 'addFigure':
+      if (state.overWrite) {
+        return {
+          ...state,
+          currentOperand: payload.numbers,
+          overWrite: false,
+        };
+      }
       if (payload.numbers === '0' && state.currentOperand === '0') {
         return state;
       }
@@ -17,7 +25,6 @@ const reducerFn = (state, { type, payload }) => {
 
       return {
         ...state,
-
         currentOperand: `${state.currentOperand || ''}${payload.numbers}`,
       };
     case 'addOperation':
@@ -52,15 +59,42 @@ const reducerFn = (state, { type, payload }) => {
       ) {
         return state;
       }
+
       return {
         ...state,
+        overWrite: true,
         previousOperand: null,
-        operation: null,
+        operator: null,
         currentOperand: evaluate(state),
       };
 
     case 'deleteEverything':
       return {};
+
+    case 'delete':
+      if (state.overWrite) {
+        return {
+          ...state,
+          currentOperand: null,
+          overWrite: false,
+        };
+      }
+
+      if (state.currentOperand == null) {
+        return state;
+      }
+
+      if (state.currentOperand.length === 1) {
+        return {
+          ...state,
+          currentOperand: null,
+        };
+      }
+
+      return {
+        ...state,
+        currentOperand: state.currentOperand.slice(0, -1),
+      };
 
     default:
       return state;
