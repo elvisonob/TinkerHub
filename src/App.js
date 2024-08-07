@@ -6,8 +6,20 @@ import OperationDigits from './OperationDigits';
 
 const reducerFn = (state, { type, payload }) => {
   switch (type) {
-    // if overwrite is true, when we add a new payload.number, it should start afresh
     case 'addFigure':
+      // if zero is already typed, no more different numbers should be typed afterwards except for '.'
+
+      if (state.currentOperand === '0' && payload.numbers === '.') {
+        return {
+          ...state,
+          currentOperand: `${state.currentOperand}${payload.numbers}`,
+        };
+      }
+
+      if (payload.numbers === '.' && state.currentOperand.includes('.')) {
+        return state;
+      }
+
       if (state.overWrite) {
         return {
           ...state,
@@ -15,18 +27,12 @@ const reducerFn = (state, { type, payload }) => {
           overWrite: false,
         };
       }
-      if (payload.numbers === '0' && state.currentOperand === '0') {
-        return state;
-      }
-
-      if (payload.numbers === '.' && state.currentOperand.includes('.')) {
-        return state;
-      }
 
       return {
         ...state,
         currentOperand: `${state.currentOperand || ''}${payload.numbers}`,
       };
+
     case 'addOperation':
       if (state.currentOperand == null && state.previousOperand == null) {
         return state;
@@ -34,81 +40,48 @@ const reducerFn = (state, { type, payload }) => {
 
       if (state.previousOperand == null) {
         return {
-          ...state,
-          operator: payload.operation,
           previousOperand: state.currentOperand,
+          operator: payload.operation,
           currentOperand: null,
         };
       }
 
-      if (state.currentOperand == null) {
-        return { ...state, operator: payload.operation };
-      }
+      //
       return {
         ...state,
-        previousOperand: evaluate(state),
         operator: payload.operation,
-        currentOperand: null,
       };
 
     case 'onEvaluate':
-      if (
-        state.previousOperand == null ||
-        state.currentOperand == null ||
-        state.operator == null
-      ) {
-        return state;
-      }
-
       return {
-        ...state,
+        currentOperand: evaluate(state),
         overWrite: true,
         previousOperand: null,
         operator: null,
-        currentOperand: evaluate(state),
+      };
+
+    case 'delete':
+      if (state.overWrite) {
+        return { ...state, currentOperand: null };
+      }
+
+      return {
+        currentOperand: state.currentOperand.slice(0, -1),
       };
 
     case 'deleteEverything':
       return {};
 
-    case 'delete':
-      if (state.overWrite) {
-        return {
-          ...state,
-          currentOperand: null,
-          overWrite: false,
-        };
-      }
-
-      if (state.currentOperand == null) {
-        return state;
-      }
-
-      if (state.currentOperand.length === 1) {
-        return {
-          ...state,
-          currentOperand: null,
-        };
-      }
-
-      return {
-        ...state,
-        currentOperand: state.currentOperand.slice(0, -1),
-      };
-
     default:
-      return state;
   }
 };
 
-const evaluate = ({ previousOperand, currentOperand, operator }) => {
+const evaluate = ({ previousOperand, operator, currentOperand }) => {
   const prev = parseFloat(previousOperand);
   const curr = parseFloat(currentOperand);
-
-  if (isNaN(curr) || isNaN(prev)) return 'chains';
+  if (isNaN(prev) || isNaN(curr)) return;
 
   let computation = '';
-
   switch (operator) {
     case '+':
       computation = prev + curr;
@@ -118,31 +91,17 @@ const evaluate = ({ previousOperand, currentOperand, operator }) => {
       computation = prev - curr;
       break;
 
-    case '*':
-      computation = prev * curr;
-      break;
-
     case '/':
       computation = prev / curr;
       break;
 
+    case '*':
+      computation = prev * curr;
+      break;
+
     default:
   }
-
-  //will take off the string to see what happens
   return computation.toString();
-};
-
-const integerFormatter = new Intl.NumberFormat('en-us', {
-  maximumFractionDigits: 0,
-});
-
-const format = (operand) => {
-  if (operand == null) return;
-  const [integer, decimal] = operand.split('.');
-  if (decimal == null) return integerFormatter.format(integer);
-
-  return `${integerFormatter.format(integer)}.${decimal}`;
 };
 
 const App = () => {
@@ -160,9 +119,9 @@ const App = () => {
     <div className="calculator-grid">
       <div className="output">
         <div className="previous-operand">
-          {format(state.previousOperand)} {state.operator}
+          {state.previousOperand} {state.operator}
         </div>
-        <div className="current-operand">{format(state.currentOperand)}</div>
+        <div className="current-operand">{state.currentOperand}</div>
       </div>
       <button className="span-two" onClick={onDelete}>
         AC
