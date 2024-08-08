@@ -7,25 +7,24 @@ import OperationDigits from './OperationDigits';
 const reducerFn = (state, { type, payload }) => {
   switch (type) {
     case 'addFigure':
-      // if zero is already typed, no more different numbers should be typed afterwards except for '.'
-
-      if (state.currentOperand === '0' && payload.numbers === '.') {
-        return {
-          ...state,
-          currentOperand: `${state.currentOperand}${payload.numbers}`,
-        };
-      }
-
-      if (payload.numbers === '.' && state.currentOperand.includes('.')) {
-        return state;
-      }
-
       if (state.overWrite) {
         return {
           ...state,
           currentOperand: payload.numbers,
           overWrite: false,
         };
+      }
+      if (state.currentOperand === '0' && payload.numbers === '0') {
+        return state;
+      }
+
+      // if currentOperand is null, and '.' is clicked, it should return state
+
+      if (state.currentOperand == null && payload.numbers === '.') {
+        return state;
+      }
+      if (payload.numbers === '.' && state.currentOperand.includes('.')) {
+        return state;
       }
 
       return {
@@ -46,13 +45,29 @@ const reducerFn = (state, { type, payload }) => {
         };
       }
 
-      //
+      if (
+        state.currentOperand !== null &&
+        state.previousOperand !== null &&
+        state.operator !== null
+      ) {
+        return {
+          ...state,
+          previousOperand: evaluate(state),
+          operator: payload.operation,
+          currentOperand: null,
+        };
+      }
       return {
         ...state,
         operator: payload.operation,
       };
 
     case 'onEvaluate':
+      // if either previousOperand is null or currentOperand is null, return state
+
+      if (state.previousOperand == null || state.currentOperand == null) {
+        return state;
+      }
       return {
         currentOperand: evaluate(state),
         overWrite: true,
