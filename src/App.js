@@ -4,6 +4,16 @@ import { useReducer } from 'react';
 import Digits from './Digits';
 import OperationDigits from './OperationDigits';
 
+const intFormat = new Intl.NumberFormat('en-us', { maximumFractionDigits: 0 });
+
+const format = (operand) => {
+  if (operand == null) return;
+  const [integer, decimal] = operand.split('.');
+
+  if (decimal == null) return `${intFormat.format(integer)}`;
+  return `${intFormat.format(integer)}.${decimal}`;
+};
+
 const reducerFn = (state, { type, payload }) => {
   switch (type) {
     case 'addFigure':
@@ -18,7 +28,16 @@ const reducerFn = (state, { type, payload }) => {
         return state;
       }
 
-      // if currentOperand is null, and '.' is clicked, it should return state
+      if (
+        state.currentOperand === '0' &&
+        payload.numbers !== '0' &&
+        payload.numbers !== '.'
+      ) {
+        return {
+          ...state,
+          currentOperand: payload.numbers,
+        };
+      }
 
       if (state.currentOperand == null && payload.numbers === '.') {
         return state;
@@ -63,8 +82,6 @@ const reducerFn = (state, { type, payload }) => {
       };
 
     case 'onEvaluate':
-      // if either previousOperand is null or currentOperand is null, return state
-
       if (state.previousOperand == null || state.currentOperand == null) {
         return state;
       }
@@ -134,9 +151,9 @@ const App = () => {
     <div className="calculator-grid">
       <div className="output">
         <div className="previous-operand">
-          {state.previousOperand} {state.operator}
+          {format(state.previousOperand)} {state.operator}
         </div>
-        <div className="current-operand">{state.currentOperand}</div>
+        <div className="current-operand">{format(state.currentOperand)}</div>
       </div>
       <button className="span-two" onClick={onDelete}>
         AC
