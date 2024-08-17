@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const ListOfTodos = () => {
-  const [list, setList] = useState([]);
-
+const ListOfTodos = (props) => {
   return (
-    <div>
-      <h1>LIST OF TODOS</h1>
-      {list.map((eachTodo) => (
-        <li key={eachTodo.id}>
-          <div>{eachTodo.text}</div>
-          <button>REMOVE</button>
-        </li>
+    <div className="listOfTodo">
+      <h3>LIST OF TODOS</h3>
+      {props.finalTodoList.map((eachTodo) => (
+        <div key={eachTodo.id}>
+          <li>
+            {eachTodo.text}{' '}
+            <button onClick={() => props.removeTodo(eachTodo.id)}>
+              REMOVE
+            </button>
+          </li>
+        </div>
       ))}
     </div>
   );

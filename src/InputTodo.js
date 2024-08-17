@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const InputTodo = () => {
-  //take the text input and send it to the list
+const InputTodo = (props) => {
   const [textInput, setTextInput] = useState('');
 
   const onTextInput = (e) => {
@@ -10,8 +9,11 @@ const InputTodo = () => {
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log(textInput);
-    setTextInput('');
+    //check if input is not empty
+    if (textInput.trim() !== '') {
+      props.onAddTodo(textInput);
+      setTextInput('');
+    }
   };
 
   return (

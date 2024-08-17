@@ -4,11 +4,22 @@
   box-sizing: border-box;
 }
 
-h1 {
+h1,
+h3 {
   padding-top: 10px;
   text-align: center;
 }
 
 form {
   text-align: center;
+}
+
+.listOfTodo {
+  display: grid;
+  justify-items: center;
+}
+
+li {
+  list-style: none;
+  padding: 5px;
 }
