@@ -1,14 +1,14 @@
-.example-rem {
-    font-size: 16px;
-    width: 200px;
-    /* Equal to 200px if the root font-size is 16px */
-    height: 100px;
-    /* Equal to 100px if the root font-size is 16px */
-    background-color: lightcoral;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 18px;
-    }
+h1 {
+  padding-top: 10px;
+  text-align: center;
+}
+
+form {
+  text-align: center;
 }
