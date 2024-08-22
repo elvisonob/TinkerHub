@@ -8,7 +8,7 @@ const App = () => {
 
   const onAddTodo = (userText) => {
     const newTodo = {
-      id: Date.now(),
+      id: Math.random(),
       text: userText,
     };
     setFinalTodoList((prevTodo) => {
@@ -16,15 +16,12 @@ const App = () => {
     });
   };
 
-  //to remove a todo
-
   const removeTodo = (id) => {
     setFinalTodoList((prevTodo) => {
       return prevTodo.filter((eachTodo) => eachTodo.id !== id);
     });
   };
 
-  // they need to be distinct with an id
   return (
     <div>
       <h1>TODO APP</h1>
