@@ -1,14 +1,17 @@
 import React from 'react';
+import { useContext } from 'react';
+import { TodoCtx } from './store/Context';
 
-const ListOfTodos = (props) => {
+const ListOfTodos = () => {
+  const todoCtx = useContext(TodoCtx);
   return (
     <div className="listOfTodo">
       <h3>LIST OF TODOS</h3>
-      {props.finalTodoList.map((eachTodo) => (
+      {todoCtx.todoList.map((eachTodo) => (
         <div key={eachTodo.id}>
           <li>
             {eachTodo.text}{' '}
-            <button onClick={() => props.removeTodo(eachTodo.id)}>
+            <button onClick={() => todoCtx.removeTodo(eachTodo.id)}>
               REMOVE
             </button>
           </li>

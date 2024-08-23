@@ -9,7 +9,6 @@ const InputTodo = (props) => {
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    //check if input is not empty
     if (textInput.trim() !== '') {
       props.onAddTodo(textInput);
       setTextInput('');
