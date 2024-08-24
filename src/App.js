@@ -27,11 +27,15 @@ const App = () => {
 
   return (
     <TodoCtx.Provider
-      value={{ todoList: finalTodoList, removeTodo: removeTodo }}
+      value={{
+        todoList: finalTodoList,
+        removeTodo: removeTodo,
+        onAddTodo: onAddTodo,
+      }}
     >
       <div>
         <h1>TODO APP</h1>
-        <InputTodo onAddTodo={onAddTodo} />
+        <InputTodo />
         <ListOfTodos />
       </div>
     </TodoCtx.Provider>

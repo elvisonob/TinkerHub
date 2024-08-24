@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
+import { TodoCtx } from './store/Context';
 
 const InputTodo = (props) => {
   const [textInput, setTextInput] = useState('');
+  const textCtx = useContext(TodoCtx);
 
   const onTextInput = (e) => {
     setTextInput(e.target.value);
@@ -10,7 +13,7 @@ const InputTodo = (props) => {
   const onHandleSubmit = (e) => {
     e.preventDefault();
     if (textInput.trim() !== '') {
-      props.onAddTodo(textInput);
+      textCtx.onAddTodo(textInput);
       setTextInput('');
     }
   };
