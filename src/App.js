@@ -1,17 +1,14 @@
 import './App.css';
-import InputTodo from './InputTodo';
-import ListOfTodos from './ListOfTodo';
-import { TodoCtxProvider } from './store/Context';
+import InputFile from './InputFile';
+import AnotherComp from './AnotherComp';
 
-const App = () => {
+const App = (props) => {
   return (
-    <TodoCtxProvider>
-      <div>
-        <h1>TODO APP</h1>
-        <InputTodo />
-        <ListOfTodos />
-      </div>
-    </TodoCtxProvider>
+    <div>
+      <InputFile title="One love" children="the peace maker">
+        <AnotherComp />
+      </InputFile>
+    </div>
   );
 };
 
