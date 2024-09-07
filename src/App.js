@@ -1,13 +1,7 @@
-import './App.css';
-import InputFile from './InputFile';
-import AnotherComp from './AnotherComp';
-
-const App = (props) => {
+const App = () => {
   return (
     <div>
-      <InputFile title="One love" children="the peace maker">
-        <AnotherComp />
-      </InputFile>
+      <h1>Let's learn redux</h1>
     </div>
   );
 };
