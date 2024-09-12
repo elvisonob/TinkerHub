@@ -1,7 +1,9 @@
+import Counter from './counter';
+
 const App = () => {
   return (
     <div>
-      <h1>Let's learn redux</h1>
+      <Counter />
     </div>
   );
 };
