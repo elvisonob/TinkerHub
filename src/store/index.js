@@ -7,7 +7,16 @@ const reducerFn = (state = { counter: 0 }, action) => {
     };
   }
 
+  if (action.type === 'increase') {
+    return {
+      counter: state.counter + action.amount,
+    };
+  }
+
   if (action.type === 'decrement') {
+    if (state.counter <= 0) {
+      return state;
+    }
     return {
       counter: state.counter - 1,
     };

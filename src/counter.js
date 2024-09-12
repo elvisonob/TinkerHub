@@ -12,10 +12,15 @@ const Counter = () => {
   const decrement = () => {
     dispatchFn({ type: 'decrement' });
   };
+
+  const increase = () => {
+    dispatchFn({ type: 'increase', amount: 10 });
+  };
   return (
     <div>
       <div onClick={increment}>+</div>
       <div>{counter}</div>
+      <div onClick={increase}>Increase by 10</div>
       <div onClick={decrement}>-</div>
     </div>
   );
