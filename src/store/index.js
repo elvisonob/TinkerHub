@@ -1,15 +1,19 @@
 import { createStore } from 'redux';
 
-const reducerFn = (state = { counter: 0 }, action) => {
+const initialState = { counter: 0, toggle: true };
+
+const reducerFn = (state = initialState, action) => {
   if (action.type === 'increment') {
     return {
       counter: state.counter + 1,
+      toggle: state.toggle,
     };
   }
 
   if (action.type === 'increase') {
     return {
       counter: state.counter + action.amount,
+      toggle: state.toggle,
     };
   }
 
@@ -19,6 +23,14 @@ const reducerFn = (state = { counter: 0 }, action) => {
     }
     return {
       counter: state.counter - 1,
+      toggle: state.toggle,
+    };
+  }
+
+  if (action.type === 'toggle') {
+    return {
+      toggle: !state.toggle,
+      counter: state.counter,
     };
   }
 
