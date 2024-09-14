@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Counter = () => {
-  const counter = useSelector((state) => state.counter);
-  const toggle = useSelector((state) => state.toggle);
   const dispatchFn = useDispatch();
+  const counter = useSelector((state) => state.counter);
+  const show = useSelector((state) => state.toggle);
 
   const increment = () => {
     dispatchFn({ type: 'increment' });
@@ -23,10 +23,12 @@ const Counter = () => {
   };
   return (
     <div>
-      <div onClick={increment}>+</div>
-      {toggle && <div>{counter}</div>}
-      <div onClick={increase}>Increase by 10</div>
-      <div onClick={decrement}>-</div>
+      <div>
+        <div onClick={increment}>+</div>
+        {show && <div>{counter}</div>}
+        <div onClick={increase}>Increase by 10</div>
+        <div onClick={decrement}>-</div>
+      </div>
       <div onClick={toggleCounter}>toggle</div>
     </div>
   );
