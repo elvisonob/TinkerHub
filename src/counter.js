@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { counterActions } from './store/index.js';
 
 const Counter = () => {
   const dispatchFn = useDispatch();
@@ -7,19 +8,19 @@ const Counter = () => {
   const show = useSelector((state) => state.toggle);
 
   const increment = () => {
-    dispatchFn({ type: 'increment' });
+    dispatchFn(counterActions.increment());
   };
 
   const decrement = () => {
-    dispatchFn({ type: 'decrement' });
+    dispatchFn(counterActions.decrement());
   };
 
-  const increase = () => {
-    dispatchFn({ type: 'increase', amount: 10 });
+  const increase = (action) => {
+    dispatchFn(counterActions.increase(10));
   };
 
   const toggleCounter = () => {
-    dispatchFn({ type: 'toggle' });
+    dispatchFn(counterActions.toggle());
   };
   return (
     <div>
