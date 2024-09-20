@@ -16,7 +16,7 @@ const Counter = () => {
   };
 
   const increase = (action) => {
-    dispatchFn(counterActions.increase(10));
+    dispatchFn(counterActions.increase(5));
   };
 
   const toggleCounter = () => {
