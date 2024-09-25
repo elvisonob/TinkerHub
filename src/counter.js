@@ -1,36 +1,29 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { counterActions } from './store/index.js';
+import { counterAction } from './store/index.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Counter = () => {
   const dispatchFn = useDispatch();
+
   const counter = useSelector((state) => state.counter);
-  const show = useSelector((state) => state.toggle);
 
-  const increment = () => {
-    dispatchFn(counterActions.increment());
+  const increase = () => {
+    dispatchFn(counterAction.increment());
   };
 
-  const decrement = () => {
-    dispatchFn(counterActions.decrement());
+  const decrease = () => {
+    dispatchFn(counterAction.decrement());
   };
 
-  const increase = (action) => {
-    dispatchFn(counterActions.increase(5));
-  };
-
-  const toggleCounter = () => {
-    dispatchFn(counterActions.toggle());
+  const increaseBy20 = () => {
+    dispatchFn(counterAction.increaseBy20(20));
   };
   return (
     <div>
-      <div>
-        <div onClick={increment}>+</div>
-        {show && <div>{counter}</div>}
-        <div onClick={increase}>Increase by 10</div>
-        <div onClick={decrement}>-</div>
-      </div>
-      <div onClick={toggleCounter}>toggle</div>
+      <h1>Counter App</h1>
+      <button onClick={increase}>+</button>
+      <div>{counter}</div>
+      <button onClick={decrease}>-</button>
+      <button onClick={increaseBy20}>Increase by 20</button>
     </div>
   );
 };
