@@ -5,11 +5,14 @@ const counter = createSlice({
   initialState: { counter: 0 },
   reducers: {
     increment(state, action) {
-      // if it gets to 10, do not increase any further
-      state.counter++;
+      if (state.counter < 10) {
+        state.counter++;
+      }
     },
     decrement(state, action) {
-      state.counter--;
+      if (state.counter > 0) {
+        state.counter--;
+      }
     },
 
     increaseBy20(state, action) {
