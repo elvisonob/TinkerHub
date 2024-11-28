@@ -1,22 +1,44 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { counterActions } from './store/index';
+import { formActions } from './store/index';
 
 const App = () => {
-  const counter = useSelector((state) => state.counter);
+  const todoInput = useSelector((state) => state.todo);
+  const todoContent = useSelector((state) => state.todoList);
   const dispatchFn = useDispatch();
 
-  const increase = () => {
-    dispatchFn(counterActions.increment());
+  const onAddInput = (e) => {
+    e.preventDefault();
+    dispatchFn(formActions.addATodo(e.target.value));
   };
 
   return (
     <div>
-      <h1>{counter}</h1>
-      <button onClick={increase}>+</button>
-      <button onClick={() => dispatchFn(counterActions.decrement())}>-</button>
-      <button onClick={() => dispatchFn(counterActions.increaseBy20(20))}>
-        IncreaseBy20
+      <h1>TODO APP</h1>
+      <h2>Add a todo</h2>
+      <form>
+        <input type="text" id="text" value={todoInput} onChange={onAddInput} />
+      </form>
+      <button
+        onClick={() => {
+          dispatchFn(formActions.onSend());
+        }}
+      >
+        Enter
       </button>
+      <div>
+        <h3>List of Todo</h3>
+        {todoContent.length === 0 ? (
+          <p>No todo added yet</p>
+        ) : (
+          <ul>
+            {todoContent.map((eachTodo) => (
+              <div>
+                <li>{eachTodo}</li>
+              </div>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

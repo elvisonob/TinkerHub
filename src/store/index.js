@@ -1,38 +1,32 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const counter = createSlice({
-  name: 'counter',
-  initialState: { counter: 0 },
+const formSlice = createSlice({
+  name: 'form',
+  initialState: { todo: '', todoList: [] },
   reducers: {
-    increment(state, action) {
-      if (state.counter < 10) {
-        state.counter++;
-      }
-    },
-    decrement(state, action) {
-      if (state.counter > 0) {
-        state.counter--;
-      }
+    addATodo(state, action) {
+      state.todo = action.payload;
     },
 
-    increaseBy20(state, action) {
-      //if counter is less than 20, increase, and if counter
-      // is more than 20, do not go past 20
-      if (state.counter >= 20) {
-        return;
+    onSend(state, action) {
+      if (state.todo.trim() === '') {
+        return alert('Add a Todo please');
       }
+      console.log(state.todo);
+      state.todo = '';
+    },
 
-      if (state.counter + action.payload > 20) {
-        state.counter = 20;
-      } else {
-        state.counter = state.counter + action.payload;
-      }
+    //take the inputed content and display it in the
+    //todoList array
+    onAddTodo(state, action) {
+      const newItem = action.payload;
+      state.todoList.push(newItem);
     },
   },
 });
 
-export const counterActions = counter.actions;
+const store = configureStore({ reducer: formSlice.reducer });
 
-const store = configureStore({ reducer: counter.reducer });
+export const formActions = formSlice.actions;
 
 export default store;
