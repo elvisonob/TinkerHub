@@ -41,6 +41,11 @@ const App = () => {
             {todoContent.map((eachTodo) => (
               <div key={eachTodo.id}>
                 <li>{eachTodo.text}</li>
+                <button
+                  onClick={() => dispatchFn(formActions.removeATodo(eachTodo))}
+                >
+                  Remove
+                </button>
               </div>
             ))}
           </ul>
