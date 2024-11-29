@@ -7,24 +7,30 @@ const App = () => {
   const dispatchFn = useDispatch();
 
   const onAddInput = (e) => {
-    e.preventDefault();
     dispatchFn(formActions.addATodo(e.target.value));
+  };
+
+  const onHandleSubmit = (e) => {
+    e.preventDefault();
+    if (todoInput.trim() === '') {
+      return alert('Add a Todo');
+    }
+
+    /// Now, take the added todo and put in an array
+
+    dispatchFn(formActions.onAddTodo(todoInput));
+    dispatchFn(formActions.addATodo(''));
   };
 
   return (
     <div>
       <h1>TODO APP</h1>
       <h2>Add a todo</h2>
-      <form>
+      <form onSubmit={onHandleSubmit}>
         <input type="text" id="text" value={todoInput} onChange={onAddInput} />
+        <button>Enter</button>
       </form>
-      <button
-        onClick={() => {
-          dispatchFn(formActions.onSend());
-        }}
-      >
-        Enter
-      </button>
+
       <div>
         <h3>List of Todo</h3>
         {todoContent.length === 0 ? (
@@ -32,7 +38,7 @@ const App = () => {
         ) : (
           <ul>
             {todoContent.map((eachTodo) => (
-              <div>
+              <div key={eachTodo}>
                 <li>{eachTodo}</li>
               </div>
             ))}

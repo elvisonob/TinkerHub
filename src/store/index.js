@@ -8,19 +8,8 @@ const formSlice = createSlice({
       state.todo = action.payload;
     },
 
-    onSend(state, action) {
-      if (state.todo.trim() === '') {
-        return alert('Add a Todo please');
-      }
-      console.log(state.todo);
-      state.todo = '';
-    },
-
-    //take the inputed content and display it in the
-    //todoList array
     onAddTodo(state, action) {
-      const newItem = action.payload;
-      state.todoList.push(newItem);
+      state.todoList.push(action.payload);
     },
   },
 });
