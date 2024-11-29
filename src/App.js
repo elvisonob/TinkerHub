@@ -11,6 +11,7 @@ const App = () => {
   };
 
   const onHandleSubmit = (e) => {
+    // include an id to todo
     e.preventDefault();
     if (todoInput.trim() === '') {
       return alert('Add a Todo');
@@ -18,7 +19,7 @@ const App = () => {
 
     /// Now, take the added todo and put in an array
 
-    dispatchFn(formActions.onAddTodo(todoInput));
+    dispatchFn(formActions.onAddTodo({ id: Math.random(), text: todoInput }));
     dispatchFn(formActions.addATodo(''));
   };
 
@@ -38,8 +39,8 @@ const App = () => {
         ) : (
           <ul>
             {todoContent.map((eachTodo) => (
-              <div key={eachTodo}>
-                <li>{eachTodo}</li>
+              <div key={eachTodo.id}>
+                <li>{eachTodo.text}</li>
               </div>
             ))}
           </ul>
