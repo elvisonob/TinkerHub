@@ -12,19 +12,38 @@ const TodoList = () => {
 
     const data = await response.json();
 
-    console.log(data);
+    setTodoList(data);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  const deleteData = async (id) => {
+    //when the delete button is clicked, the todo should be deleted in memory, since there is no database
+    const response = await fetch(`http://localhost:5000/api/todo/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      console.log(`Could not delete ${id}`);
+    }
+
+    const updatedTodos = await response.json();
+
+    setTodoList(updatedTodos);
+  };
+
   return (
     <div>
       <h2>List of added Todo</h2>
       <ul>
         {todoList.map((eachItem) => (
-          <li key={eachItem.id}>{eachItem.text}</li>
+          <div key={eachItem.id}>
+            <li>{eachItem.text}</li>
+            <button>Edit</button>
+            <button onClick={() => deleteData(eachItem.id)}>Delete</button>
+          </div>
         ))}
       </ul>
     </div>
