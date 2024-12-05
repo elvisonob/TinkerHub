@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 const TodoList = () => {
   const [todoList, setTodoList] = useState([]);
+  const [editTodo, setEditTodo] = useState(null);
+  const [newText, setNewText] = useState('');
 
   const fetchData = async () => {
     const response = await fetch('http://localhost:5000/api/todo/');
@@ -40,9 +42,19 @@ const TodoList = () => {
       <ul>
         {todoList.map((eachItem) => (
           <div key={eachItem.id}>
-            <li>{eachItem.text}</li>
-            <button>Edit</button>
-            <button onClick={() => deleteData(eachItem.id)}>Delete</button>
+            {editTodo === eachItem.id ? (
+              <div>
+                <input name="text" id="text" />
+                <button>Save</button>
+                <button>Cancel</button>
+              </div>
+            ) : (
+              <div>
+                <li>{eachItem.text}</li>
+                <button>Edit</button>
+                <button onClick={() => deleteData(eachItem.id)}>Delete</button>
+              </div>
+            )}
           </div>
         ))}
       </ul>
