@@ -21,6 +21,39 @@ const TodoList = () => {
     fetchData();
   }, []);
 
+  const onHandleEditText = (todo) => {
+    setEditTodo(todo.id);
+  };
+
+  const onHandleNewTextEdit = (e) => {
+    setNewText(e.target.value);
+  };
+
+  const onSaveButton = async (id) => {
+    // the edited todo should be sent to the backend
+    const response = await fetch(`http://localhost:5000/api/todo/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json', // Set the appropriate headers
+      },
+      body: JSON.stringify({ newText: newText }),
+    });
+
+    if (!response.ok) {
+      console.log('Cannot apply todo');
+    }
+
+    const updatedTodos = await response.json();
+
+    setTodoList(updatedTodos);
+    // const updatedTodos = todoList.map((eachTodo) =>
+    //   eachTodo.id === id ? { ...eachTodo, text: newText } : eachTodo
+    // );
+
+    // setTodoList(updatedTodos);
+    // setEditTodo(null);
+  };
+
   const deleteData = async (id) => {
     //when the delete button is clicked, the todo should be deleted in memory, since there is no database
     const response = await fetch(`http://localhost:5000/api/todo/${id}`, {
@@ -44,14 +77,21 @@ const TodoList = () => {
           <div key={eachItem.id}>
             {editTodo === eachItem.id ? (
               <div>
-                <input name="text" id="text" />
-                <button>Save</button>
+                {eachItem.text}
+                <input
+                  name="text"
+                  id="text"
+                  value={newText}
+                  onChange={onHandleNewTextEdit}
+                />
+
+                <button onClick={() => onSaveButton(eachItem.id)}>Save</button>
                 <button>Cancel</button>
               </div>
             ) : (
               <div>
                 <li>{eachItem.text}</li>
-                <button>Edit</button>
+                <button onClick={() => onHandleEditText(eachItem)}>Edit</button>
                 <button onClick={() => deleteData(eachItem.id)}>Delete</button>
               </div>
             )}
