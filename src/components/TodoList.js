@@ -4,7 +4,9 @@ const TodoList = () => {
   const [todoList, setTodoList] = useState([]);
   const [editTodo, setEditTodo] = useState(null);
   const [newText, setNewText] = useState('');
+  const [colorText, setColorText] = useState('');
 
+  //if all fields are filled, it should be a PUT request, else, a PATCH request?
   const fetchData = async () => {
     const response = await fetch('http://localhost:5000/api/todo/');
 
@@ -29,6 +31,10 @@ const TodoList = () => {
     setNewText(e.target.value);
   };
 
+  const onHandleNewColorEdit = (e) => {
+    setColorText(e.target.value);
+  };
+
   const onSaveButton = async (id) => {
     // the edited todo should be sent to the backend
     const response = await fetch(`http://localhost:5000/api/todo/${id}`, {
@@ -36,7 +42,7 @@ const TodoList = () => {
       headers: {
         'Content-Type': 'application/json', // Set the appropriate headers
       },
-      body: JSON.stringify({ newText: newText }),
+      body: JSON.stringify({ newText: newText, color: colorText }),
     });
 
     if (!response.ok) {
@@ -46,16 +52,9 @@ const TodoList = () => {
     const updatedTodos = await response.json();
 
     setTodoList(updatedTodos);
-    // const updatedTodos = todoList.map((eachTodo) =>
-    //   eachTodo.id === id ? { ...eachTodo, text: newText } : eachTodo
-    // );
-
-    // setTodoList(updatedTodos);
-    // setEditTodo(null);
   };
 
   const deleteData = async (id) => {
-    //when the delete button is clicked, the todo should be deleted in memory, since there is no database
     const response = await fetch(`http://localhost:5000/api/todo/${id}`, {
       method: 'DELETE',
     });
@@ -68,7 +67,7 @@ const TodoList = () => {
 
     setTodoList(updatedTodos);
   };
-
+  // can i click one edit button and it shows me a way to edit all values?
   return (
     <div>
       <h2>List of added Todo</h2>
@@ -78,19 +77,30 @@ const TodoList = () => {
             {editTodo === eachItem.id ? (
               <div>
                 {eachItem.text}
+                {eachItem.color}
+                <br></br>
+                <label>Text</label>
                 <input
                   name="text"
                   id="text"
                   value={newText}
                   onChange={onHandleNewTextEdit}
                 />
+                <label>Color</label>
+                <input
+                  name="text"
+                  id="text"
+                  value={colorText}
+                  onChange={onHandleNewColorEdit}
+                />
 
                 <button onClick={() => onSaveButton(eachItem.id)}>Save</button>
-                <button>Cancel</button>
+                <button onClick={() => setEditTodo(null)}>Cancel</button>
               </div>
             ) : (
               <div>
                 <li>{eachItem.text}</li>
+                <li>{eachItem.color}</li>
                 <button onClick={() => onHandleEditText(eachItem)}>Edit</button>
                 <button onClick={() => deleteData(eachItem.id)}>Delete</button>
               </div>
