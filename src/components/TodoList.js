@@ -37,12 +37,21 @@ const TodoList = () => {
 
   const onSaveButton = async (id) => {
     // the edited todo should be sent to the backend
+    const updatedFields = {};
+    if (newText) updatedFields.newText = newText;
+    if (colorText) updatedFields.color = colorText;
+
+    const method = Object.keys(updatedFields).length === 2 ? 'PUT' : 'PATCH';
+
     const response = await fetch(`http://localhost:5000/api/todo/${id}`, {
-      method: 'PUT',
+      // if all the forms are updated, it should be a PUT request.
+      //if only a partial form is updated, it should be a patch
+
+      method,
       headers: {
         'Content-Type': 'application/json', // Set the appropriate headers
       },
-      body: JSON.stringify({ newText: newText, color: colorText }),
+      body: JSON.stringify(updatedFields),
     });
 
     if (!response.ok) {
@@ -53,6 +62,8 @@ const TodoList = () => {
 
     setTodoList(updatedTodos);
   };
+
+  //do PATCH now
 
   const deleteData = async (id) => {
     const response = await fetch(`http://localhost:5000/api/todo/${id}`, {
