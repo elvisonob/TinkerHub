@@ -4,7 +4,7 @@ const TodoForm = () => {
       <h1>Add a must Todo</h1>
       <form>
         <input id="text" name="text" />
-        <button>Enter</button>
+        <button>Ente</button>
       </form>
     </div>
   );
