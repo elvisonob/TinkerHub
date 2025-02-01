@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import QuestionTimer from './QuestionTimer';
 import QUESTIONS from '../questions';
 
 const Quiz = () => {
@@ -28,6 +29,10 @@ const Quiz = () => {
 
   return (
     <div id="question">
+      <QuestionTimer
+        timeout={10000}
+        onTimeout={() => handleSelectAnswer(null)}
+      />
       <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
       <ul id="answers">
         {shuffledAnswers.map((answer) => (
