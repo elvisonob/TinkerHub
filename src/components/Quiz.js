@@ -26,7 +26,7 @@ const Quiz = () => {
   if (quizIsComplete) {
     return (
       <div id="summary" alt="Trophy icon">
-        <img src="" />
+        <img />
         <h2>Quiz Completed!</h2>
       </div>
     );
