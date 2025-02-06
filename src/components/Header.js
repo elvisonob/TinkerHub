@@ -2,7 +2,7 @@ const Header = () => {
   return (
     <header>
       <img />
-      <h1>React Quiz</h1>
+      <h1>React Quizz</h1>
     </header>
   );
 };
