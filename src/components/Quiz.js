@@ -2,7 +2,16 @@ import React, { useState, useCallback } from 'react';
 import QuestionTimer from './QuestionTimer';
 import QUESTIONS from '../questions';
 
+/* I want to ensure that when an answer is clicked,
+   we get notified with a red color if wrong answer
+   and a green color if right answer
+
+   Users can also wait to see the styling with no rush
+   to the next question
+*/
+
 const Quiz = () => {
+  const [answerState, setAnswerState] = useState('');
   const [userAnswers, setUserAnswers] = useState([]);
 
   const activeQuestionIndex = userAnswers.length;
@@ -12,6 +21,7 @@ const Quiz = () => {
   const handleSelectAnswer = useCallback(function handleSelectAnswer(
     selectedAnswer
   ) {
+    setAnswerState('answered');
     setUserAnswers((prevUserAnswer) => {
       return [...prevUserAnswer, selectedAnswer];
     });
@@ -27,7 +37,7 @@ const Quiz = () => {
     return (
       <div id="summary" alt="Trophy icon">
         <img />
-        <h2>Quiz Completed</h2>
+        <h2>Quiz Completed!</h2>
       </div>
     );
   }
@@ -37,7 +47,11 @@ const Quiz = () => {
 
   return (
     <div id="question">
-      <QuestionTimer timeout={10000} onTimeout={handleSkipAnswer} />
+      <QuestionTimer
+        key={activeQuestionIndex}
+        timeout={10000}
+        onTimeout={handleSkipAnswer}
+      />
       <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
       <ul id="answers">
         {shuffledAnswers.map((answer) => (
