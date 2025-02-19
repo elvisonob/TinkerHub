@@ -50,6 +50,7 @@ const Quiz = () => {
   return (
     <Questions
       key={activeQuestionIndex}
+      index={activeQuestionIndex}
       answerState={answerState}
       onSelect={handleSelectAnswer}
       questionText={QUESTIONS[activeQuestionIndex].text}

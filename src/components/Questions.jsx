@@ -9,11 +9,10 @@ or whether an answer has been selected
 */
 
 const Questions = ({
-  key,
+  index,
   questions,
   selectAnswer,
   onSelect,
-  answerState,
   onSkipAnswer,
   questionText,
 }) => {
@@ -28,17 +27,28 @@ const Questions = ({
       isCorrect: null,
     });
 
-    // setTimeout to discovrt whether it is the right answer or wrong one
-
-    let answerState = '';
+    // setTimeout to discover whether it is the right answer or wrong one
 
     setTimeout(() => {
       setAnswer({
         selectedAnswer: answer,
-        isCorrect: QUESTIONS[key].answers[0] === answe,
+        isCorrect: QUESTIONS[index].answers[0] === answer,
       });
+
+      setTimeout(() => {
+        onSelect(answer);
+      }, 2000);
     }, 1000);
   };
+
+  let answerState = '';
+
+  if (answer.selectedAnswer && answer.isCorrect !== null) {
+    answerState = answer.isCorrect ? 'correct' : 'wrong';
+  } else if (answer.selectedAnswer) {
+    answerState = 'answer';
+  }
+
   return (
     <div id="question">
       <QuestionTimer timeout={10000} onTimeout={onSkipAnswer} />
