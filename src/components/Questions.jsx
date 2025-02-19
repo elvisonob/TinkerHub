@@ -28,14 +28,14 @@ const Questions = ({
       isCorrect: null,
     });
 
-    // setTimeout to discover whether it is the right answer or wrong one
+    // setTimeout to discovrt whether it is the right answer or wrong one
 
     let answerState = '';
 
     setTimeout(() => {
       setAnswer({
         selectedAnswer: answer,
-        isCorrect: QUESTIONS[key].answers[0] === answer,
+        isCorrect: QUESTIONS[key].answers[0] === answe,
       });
     }, 1000);
   };
