@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
-const Answers = ({ userSelectAnswer, answerState, onSelect, question }) => {
+const Answers = ({ userSelectAnswer, answerState, onSelect, answers }) => {
   const shuffledAnswers = useRef();
 
   if (!shuffledAnswers.current) {
-    shuffledAnswers.current = [...question];
+    shuffledAnswers.current = [...answers];
     shuffledAnswers.current.sort(() => Math.random() - 0.5);
   }
 
@@ -32,6 +32,7 @@ const Answers = ({ userSelectAnswer, answerState, onSelect, question }) => {
               onClick={() => {
                 onSelect(answer);
               }}
+              disabled={answerState !== ''}
             >
               {answer}
             </button>

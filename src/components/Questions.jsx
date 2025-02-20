@@ -8,14 +8,7 @@ Set the answer state here, check if an answer is right or wrong
 or whether an answer has been selected 
 */
 
-const Questions = ({
-  index,
-  questions,
-  selectAnswer,
-  onSelect,
-  onSkipAnswer,
-  questionText,
-}) => {
+const Questions = ({ index, onSelect, onSkipAnswer }) => {
   const [answer, setAnswer] = useState({
     selectedAnswer: '',
     isCorrect: null,
@@ -46,18 +39,18 @@ const Questions = ({
   if (answer.selectedAnswer && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? 'correct' : 'wrong';
   } else if (answer.selectedAnswer) {
-    answerState = 'answer';
+    answerState = 'answered';
   }
 
   return (
     <div id="question">
       <QuestionTimer timeout={10000} onTimeout={onSkipAnswer} />
-      <h2>{questionText}</h2>
+      <h2>{QUESTIONS[index].text}</h2>
       <Answers
-        userSelectAnswer={selectAnswer}
+        userSelectAnswer={answer.selectedAnswer}
         answerState={answerState}
+        answers={QUESTIONS[index].answers}
         onSelect={handleSelectAnswer}
-        question={questions}
       />
     </div>
   );
