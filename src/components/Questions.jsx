@@ -3,11 +3,6 @@ import Answers from './Answers.jsx';
 import { useState } from 'react';
 import QUESTIONS from '../questions';
 
-/*
-Set the answer state here, check if an answer is right or wrong
-or whether an answer has been selected 
-*/
-
 const Questions = ({ index, onSelect, onSkipAnswer }) => {
   const [answer, setAnswer] = useState({
     selectedAnswer: '',
@@ -29,8 +24,6 @@ const Questions = ({ index, onSelect, onSkipAnswer }) => {
       selectedAnswer: answer,
       isCorrect: null,
     });
-
-    // setTimeout to discover whether it is the right answer or wrong one
 
     setTimeout(() => {
       setAnswer({
@@ -55,6 +48,7 @@ const Questions = ({ index, onSelect, onSkipAnswer }) => {
   return (
     <div id="question">
       <QuestionTimer
+        key={timer}
         timeout={timer}
         onTimeout={answerState === '' ? onSkipAnswer : null}
         mode={answerState}

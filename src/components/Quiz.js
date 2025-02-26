@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Questions from './Questions';
 import QUESTIONS from '../questions';
+import Summary from './Summary.js';
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
@@ -24,12 +25,7 @@ const Quiz = () => {
   );
 
   if (quizIsComplete) {
-    return (
-      <div id="summary" alt="Trophy icon">
-        <img />
-        <h2>Quiz Completed!</h2>
-      </div>
-    );
+    return <Summary userAnswers={userAnswers} />;
   }
 
   return (
