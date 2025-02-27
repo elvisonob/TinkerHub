@@ -1,40 +1,17 @@
-import React, { useState, useCallback, useRef } from 'react';
-import Questions from './Questions';
-import QUESTIONS from '../questions';
-import Summary from './Summary.js';
+import QUESTIONS from '../questions.js';
 
 const Quiz = () => {
-  const [userAnswers, setUserAnswers] = useState([]);
-
-  const activeQuestionIndex = userAnswers.length;
-
-  const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
-
-  const handleSelectAnswer = useCallback(function handleSelectAnswer(
-    selectedAnswer
-  ) {
-    setUserAnswers((prevUserAnswer) => {
-      return [...prevUserAnswer, selectedAnswer];
-    });
-  },
-  []);
-
-  const handleSkipAnswer = useCallback(
-    () => handleSelectAnswer(null),
-    [handleSelectAnswer]
-  );
-
-  if (quizIsComplete) {
-    return <Summary userAnswers={userAnswers} />;
-  }
-
   return (
-    <Questions
-      key={activeQuestionIndex}
-      index={activeQuestionIndex}
-      onSelect={handleSelectAnswer}
-      onSkipAnswer={handleSkipAnswer}
-    />
+    <div className="container">
+      <div className="quiz">
+        <h2>{QUESTIONS[0].text}</h2>
+        <ul>
+          {QUESTIONS[0].answers.map((answerOptions) => (
+            <li key={answerOptions}>{answerOptions}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 

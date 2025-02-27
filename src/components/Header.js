@@ -1,9 +1,8 @@
 const Header = () => {
   return (
-    <header>
-      <img />
-      <h1>React Quizz</h1>
-    </header>
+    <div className="header">
+      <h2>REACTQUIZ</h2>
+    </div>
   );
 };
 
