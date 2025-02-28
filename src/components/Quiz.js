@@ -1,17 +1,10 @@
 import QUESTIONS from '../questions.js';
+import Summary from './Summary';
 import { useState } from 'react';
+import QuestionTimer from './QuestionTimer';
 
 const Quiz = () => {
-  /* Now, when each question is clicked, I should go to the next question, all
-  till the end
-  */
-
-  /*
- I save the userAnswers and on that condition, i move to the next question
-  */
   const [userAnswers, setUserAnswers] = useState([]);
-
-  /* When userAnswers is 0, the activeQuestionIndex should be 1  */
 
   const activeQuestionIndex = userAnswers.length;
 
@@ -21,12 +14,28 @@ const Quiz = () => {
     });
   };
 
+  // when no answer picked, handleSkipAnswer function should kick in
+  const handleSkipAnswer = () => {
+    setUserAnswers((prevAnswers) => {
+      return [...prevAnswers, null];
+    });
+  };
+
+  if (activeQuestionIndex === QUESTIONS.length) {
+    return <Summary />;
+  }
+
+  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
+
+  shuffledAnswers.sort(() => Math.random() - 0.5);
+
   return (
     <div className="container">
       <div className="quiz">
+        <QuestionTimer onSkipAnswer={handleSkipAnswer} />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul>
-          {QUESTIONS[activeQuestionIndex].answers.map((answerOptions) => (
+          {shuffledAnswers.map((answerOptions) => (
             <li
               key={answerOptions}
               className="answerOptions"

@@ -1,7 +1,7 @@
 const QUESTIONS = [
   {
     id: 'q1',
-    text: 'Who is the Present of the United States',
+    text: 'Who is the President of the United States',
     answers: ['Donald Trump', 'Kamala Harris', 'Joe Bidden', 'Barrack Obama'],
   },
   {
