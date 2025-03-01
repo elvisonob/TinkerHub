@@ -1,27 +1,23 @@
 import { useState, useEffect } from 'react';
 
-const QuestionTimer = ({ onSkipAnswer }) => {
-  const [remainingTime, setRemainingTime] = useState(10000);
-  /* Now, I have a progress bar and it is serving as a question timer.
+const QuestionTimer = ({ onTimeout, timeout }) => {
+  const [remainingTime, setRemainingTime] = useState(timeout);
 
-The plan is to ensure that when it runs out, a question moves to the next */
-
-  // So, i should have a handleSkip function for it
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      onSkipAnswer();
-    }, 10000);
-
-    return () => clearTimeout(timeout);
-  });
+  // when the first timer runs out and we move to the next question, a new timer should run
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    console.log('set Timeout');
+    const timingOut = setTimeout(onTimeout, timeout);
+  }, [onTimeout, timeout]);
+
+  useEffect(() => {
+    console.log('set Interval');
+    setInterval(() => {
       setRemainingTime((prevRemainingTime) => prevRemainingTime - 100);
     }, 100);
-  });
+  }, []);
 
-  return <progress value={remainingTime} max={10000} />;
+  return <progress value={remainingTime} max={timeout} />;
 };
 
 export default QuestionTimer;
