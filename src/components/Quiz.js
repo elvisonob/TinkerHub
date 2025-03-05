@@ -5,13 +5,22 @@ import QuestionTimer from './QuestionTimer';
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
+  const [answers, setAnswers] = useState('');
 
   console.log(userAnswers);
+
+  //Now the next step is to highlight answers and probably include more states
+
+  //When a question is clicked, it should show the user whether the question is right or wrong by showing different
+  // colors, green for correct, red for wrong
 
   const activeQuestionIndex = userAnswers.length;
 
   const onHandleAnswer = useCallback(function onHandleAnswer(answer) {
     setUserAnswers((prevAnswers) => {
+      // question clicked and a 2 minutes wait
+
+      setTimeout(() => {}, 2000);
       return [...prevAnswers, answer];
     });
   }, []);
@@ -32,7 +41,11 @@ const Quiz = () => {
   return (
     <div className="container">
       <div className="quiz">
-        <QuestionTimer onTimeout={handleSkipAnswer} timeout={10000} />
+        <QuestionTimer
+          key={activeQuestionIndex}
+          onTimeout={handleSkipAnswer}
+          timeout={10000}
+        />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul>
           {shuffledAnswers.map((answerOptions) => (
