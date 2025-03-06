@@ -43,6 +43,10 @@ li {
   list-style: none;
 }
 
+li.correct {
+  background-color: green;
+}
+
 li.answerOptions:hover {
   background-color: aqua;
   cursor: pointer;

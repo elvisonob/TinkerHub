@@ -1,29 +1,45 @@
 import QUESTIONS from '../questions.js';
 import Summary from './Summary';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import QuestionTimer from './QuestionTimer';
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
-  const [answers, setAnswers] = useState('');
+  const [answerState, setAnswerState] = useState('');
 
   console.log(userAnswers);
 
-  //Now the next step is to highlight answers and probably include more states
+  const activeQuestionIndex =
+    answerState === '' ? userAnswers.length : userAnswers.length - 1;
 
-  //When a question is clicked, it should show the user whether the question is right or wrong by showing different
-  // colors, green for correct, red for wrong
+  //if question clicked, delay before going to next question, show different colors
 
-  const activeQuestionIndex = userAnswers.length;
+  let isSelectAnswer = '';
 
-  const onHandleAnswer = useCallback(function onHandleAnswer(answer) {
-    setUserAnswers((prevAnswers) => {
-      // question clicked and a 2 minutes wait
+  const onHandleAnswer = useCallback(
+    function onHandleAnswer(answer) {
+      setAnswerState('answered');
+      setUserAnswers((prevAnswers) => {
+        // question clicked and a 2 minutes wait
 
-      setTimeout(() => {}, 2000);
-      return [...prevAnswers, answer];
-    });
-  }, []);
+        return [...prevAnswers, answer];
+      });
+
+      setTimeout(() => {
+        // if an answer is clicked, give a 2 minutes timer and then show the user whether it is correct or wrong
+        if (answer === QUESTIONS[activeQuestionIndex].answers[0]) {
+          setAnswerState('correct');
+        } else {
+          setAnswerState('wrong');
+        }
+
+        setTimeout(() => {
+          setAnswerState('');
+        }, 2000);
+      }, 1000);
+    },
+    [activeQuestionIndex]
+  );
 
   const handleSkipAnswer = useCallback(
     () => onHandleAnswer(null),
@@ -49,12 +65,10 @@ const Quiz = () => {
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul>
           {shuffledAnswers.map((answerOptions) => (
-            <li
-              key={answerOptions}
-              className="answerOptions"
-              onClick={() => onHandleAnswer(answerOptions)}
-            >
-              {answerOptions}
+            <li key={answerOptions} className="answerOptions">
+              <button onClick={() => onHandleAnswer(answerOptions)}>
+                {answerOptions}
+              </button>
             </li>
           ))}
         </ul>
