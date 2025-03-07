@@ -14,8 +14,6 @@ const Quiz = () => {
 
   //if question clicked, delay before going to next question, show different colors
 
-  let isSelectAnswer = '';
-
   const onHandleAnswer = useCallback(
     function onHandleAnswer(answer) {
       setAnswerState('answered');
