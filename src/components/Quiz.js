@@ -63,22 +63,24 @@ const Quiz = () => {
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul>
           {shuffledAnswers.map((answerOptions) => {
-            const selectedAnswer = userAnswers[userAnswers - 1];
-            const isSelected = answerOptions === selectedAnswer;
+            const isSelected =
+              userAnswers[userAnswers.length - 1] === answerOptions;
 
             let cssClass = '';
+            if (answerState === 'answered' && isSelected) {
+              cssClass = 'selected';
+            }
+
             if (
-              isSelected &&
-              selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]
+              (answerState === 'correct' || answerState === 'wrong') &&
+              isSelected
             ) {
-              cssClass = 'green';
-            } else {
-              cssClass = 'red';
+              cssClass = answerState;
             }
 
             return (
               <li key={answerOptions} className={cssClass}>
-                <button onClick={() => onHandleAnswer(selectedAnswer)}>
+                <button onClick={() => onHandleAnswer(answerOptions)}>
                   {answerOptions}
                 </button>
               </li>

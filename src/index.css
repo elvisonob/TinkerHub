@@ -51,6 +51,10 @@ li.wrong {
   background-color: red;
 }
 
+li.selected {
+  background-color: yellow;
+}
+
 li.answerOptions:hover {
   background-color: aqua;
   cursor: pointer;
