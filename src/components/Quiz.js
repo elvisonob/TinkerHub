@@ -7,6 +7,8 @@ const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const [answerState, setAnswerState] = useState('');
 
+  // const shuffledAnswers = useRef();
+
   console.log(userAnswers);
 
   const activeQuestionIndex =
