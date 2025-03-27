@@ -1,6 +1,6 @@
 import QUESTIONS from '../questions.js';
 import Summary from './Summary';
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import Questions from './Questions';
 
 const Quiz = () => {
@@ -47,9 +47,8 @@ const Quiz = () => {
     <div className="container">
       <Questions
         key={activeQuestionIndex}
-        questionText={QUESTIONS[activeQuestionIndex].text}
+        index={activeQuestionIndex}
         onSkipAnswer={handleSkipAnswer}
-        answerState={answerState}
         answers={QUESTIONS[activeQuestionIndex].answers}
         selectedAnswer={userAnswers[userAnswers.length - 1]}
         onSelectedAnswer={onHandleAnswer}
