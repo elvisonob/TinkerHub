@@ -3,15 +3,7 @@ import QuestionTimer from './QuestionTimer.js';
 import { useState } from 'react';
 import QUESTIONS from '../questions.js';
 
-// the project plan right now is to write some state here independent of the
-//Quiz page
-const Questions = ({
-  onSkipAnswer,
-  index,
-  answers,
-  selectedAnswer,
-  onSelectedAnswer,
-}) => {
+const Questions = ({ onSkipAnswer, index, answers, onSelectedAnswer }) => {
   const [answer, setAnswer] = useState({
     selectedAnswer: '',
     isCorrect: null,
@@ -40,7 +32,7 @@ const Questions = ({
   if (answer.selectedAnswer && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? 'correct' : 'wrong';
   } else if (answer.selectedAnswer) {
-    answerState = 'selected';
+    answerState = 'answered';
   }
 
   return (
@@ -49,7 +41,7 @@ const Questions = ({
       <h2>{QUESTIONS[index].text}</h2>
       <Answers
         onSelectAnswer={handleSelectAnswer}
-        selectedAnswer={selectedAnswer}
+        selectedAnswer={answer.selectedAnswer}
         answerState={answerState}
         answers={answers}
       />
