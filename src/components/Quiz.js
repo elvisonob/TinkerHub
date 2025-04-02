@@ -22,7 +22,7 @@ const Quiz = () => {
   );
 
   if (activeQuestionIndex === QUESTIONS.length) {
-    return <Summary />;
+    return <Summary answers={userAnswers} />;
   }
 
   return (
