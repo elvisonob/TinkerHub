@@ -1,39 +1,42 @@
 import QUESTIONS from '../questions.js';
 import Summary from './Summary';
-import { useState, useCallback } from 'react';
-import Questions from './Questions';
+import { useState } from 'react';
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
-
+  const activeQuestionIndex = userAnswers.length;
   console.log(userAnswers);
 
-  const activeQuestionIndex = userAnswers.length;
-
-  const onHandleAnswer = useCallback(function onHandleAnswer(answer) {
-    setUserAnswers((prevAnswers) => {
-      return [...prevAnswers, answer];
+  const onHandleAnswerClick = (answer) => {
+    setUserAnswers((prevAnswer) => {
+      return [...prevAnswer, answer];
     });
-  }, []);
+  };
 
-  const handleSkipAnswer = useCallback(
-    () => onHandleAnswer(null),
-    [onHandleAnswer]
-  );
+  //if the questions are finished, then show the user a Summary page
 
   if (activeQuestionIndex === QUESTIONS.length) {
-    return <Summary answers={userAnswers} />;
+    return (
+      <div>
+        <Summary />
+      </div>
+    );
   }
 
   return (
     <div className="container">
-      <Questions
-        key={activeQuestionIndex}
-        index={activeQuestionIndex}
-        onSkipAnswer={handleSkipAnswer}
-        answers={QUESTIONS[activeQuestionIndex].answers}
-        onSelectedAnswer={onHandleAnswer}
-      />
+      <div className="quiz">
+        <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
+        {QUESTIONS[activeQuestionIndex].answers.map((answer) => {
+          return (
+            <li key={answer}>
+              <button onClick={() => onHandleAnswerClick(answer)}>
+                {answer}
+              </button>
+            </li>
+          );
+        })}
+      </div>
     </div>
   );
 };
