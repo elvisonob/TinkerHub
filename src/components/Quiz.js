@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
-  const [timer, setTimer] = useState(10000);
   const activeQuestionIndex = userAnswers.length;
   console.log(userAnswers);
 
@@ -23,10 +22,6 @@ const Quiz = () => {
     onHandleAnswerClick(null);
   };
 
-  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
-
-  shuffledAnswers.sort(() => Math.random() - 0.5);
-
   if (activeQuestionIndex === QUESTIONS.length) {
     return (
       <div>
@@ -35,10 +30,17 @@ const Quiz = () => {
     );
   }
 
+  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
+  shuffledAnswers.sort(() => Math.random() - 0.5);
+
   return (
     <div className="container">
       <div className="quiz">
-        <QuestionTimer timer={timer} onSkipAnswer={onHandleSkipAnswer} />
+        <QuestionTimer
+          key={activeQuestionIndex}
+          timer={10000}
+          onTimeout={onHandleSkipAnswer}
+        />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         {shuffledAnswers.map((answer) => {
           return (

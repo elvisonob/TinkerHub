@@ -1,24 +1,22 @@
 import { useState, useEffect } from 'react';
 
-// Now, i need to set an Interval
+// I want the timer not to continue running into the second question
 
-const QuestionTimer = ({ timer, onSkipAnswer }) => {
-  const [interval, setInterval] = useState(10000);
-  setTimeout(() => {
-    onSkipAnswer();
-  }, 10000);
+const QuestionTimer = ({ timer, onTimeout }) => {
+  const [remainingTime, setRemainingTime] = useState(timer);
+  useEffect(() => {
+    const timing = setTimeout(onTimeout, timer);
+    clearTimeout(() => timing);
+  }, [timer, onTimeout]);
 
   useEffect(() => {
-    const intervalTime = setInterval((prev) => {
-      return prev - 100;
+    const timingInterval = setInterval(() => {
+      setRemainingTime((prev) => prev - 100);
+      clearInterval(() => timingInterval);
     }, 100);
-
-    return () => {
-      clearInterval(intervalTime);
-    };
   }, []);
 
-  return <progress value={timer} max={10000} />;
+  return <progress value={remainingTime} max={timer} />;
 };
 
 export default QuestionTimer;
