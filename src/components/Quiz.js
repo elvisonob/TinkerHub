@@ -1,26 +1,25 @@
 import QUESTIONS from '../questions.js';
 import Summary from './Summary';
 import QuestionTimer from './QuestionTimer';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const activeQuestionIndex = userAnswers.length;
   console.log(userAnswers);
 
-  const onHandleAnswerClick = (answer) => {
+  const onHandleAnswerClick = useCallback(function onHandleAnswerClick(answer) {
     setUserAnswers((prevAnswer) => {
       return [...prevAnswer, answer];
     });
-  };
+  }, []);
 
-  // What i want to do now is simple.
-  // Write a component for a question timer, and when the question timer
-  // runs out and an answer isn't selected, null should be sent to the array
-
-  const onHandleSkipAnswer = () => {
-    onHandleAnswerClick(null);
-  };
+  const onHandleSkipAnswer = useCallback(
+    function onHandleSkipAnswer() {
+      onHandleAnswerClick(null);
+    },
+    [onHandleAnswerClick]
+  );
 
   if (activeQuestionIndex === QUESTIONS.length) {
     return (
