@@ -3,16 +3,33 @@ import Summary from './Summary';
 import QuestionTimer from './QuestionTimer';
 import { useState, useCallback } from 'react';
 
+//Now, when an answer is clicked, it should show a yellow color first, and
+// if it is the right answer, it should then change to green
+// if wrong answer, it should change to red
+
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
+  const [answerState, setAnswerState] = useState('');
   const activeQuestionIndex = userAnswers.length;
   console.log(userAnswers);
 
-  const onHandleAnswerClick = useCallback(function onHandleAnswerClick(answer) {
-    setUserAnswers((prevAnswer) => {
-      return [...prevAnswer, answer];
-    });
-  }, []);
+  const onHandleAnswerClick = useCallback(
+    function onHandleAnswerClick(answer) {
+      setTimeout(() => {
+        setAnswerState('selected');
+        if (answer === QUESTIONS[activeQuestionIndex].answers[0]) {
+          setAnswerState('correct');
+        } else {
+          setAnswerState('wrong');
+        }
+      }, 1000);
+
+      setUserAnswers((prevAnswer) => {
+        return [...prevAnswer, answer];
+      });
+    },
+    [activeQuestionIndex]
+  );
 
   const onHandleSkipAnswer = useCallback(
     function onHandleSkipAnswer() {
@@ -42,9 +59,17 @@ const Quiz = () => {
         />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         {shuffledAnswers.map((answer) => {
+          let isSelected = answer === userAnswers[userAnswers.length - 1];
+          if (isSelected && answerState === '') {
+            answerState = 'selected';
+          }
+
           return (
             <li key={answer}>
-              <button onClick={() => onHandleAnswerClick(answer)}>
+              <button
+                onClick={() => onHandleAnswerClick(answer)}
+                className={answerState}
+              >
                 {answer}
               </button>
             </li>

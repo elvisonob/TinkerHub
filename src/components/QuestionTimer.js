@@ -17,6 +17,8 @@ const QuestionTimer = ({ timer, onTimeout }) => {
     console.log('setInterval');
     const timingInterval = setInterval(() => {
       setRemainingTime((prev) => prev - 100);
+
+      return () => clearInterval(timingInterval);
     }, 100);
   }, []);
 
