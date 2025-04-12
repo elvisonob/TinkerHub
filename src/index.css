@@ -55,7 +55,7 @@ li.selected {
   background-color: yellow;
 }
 
-li.answerOptions:hover {
+li:hover {
   background-color: aqua;
   cursor: pointer;
 }
