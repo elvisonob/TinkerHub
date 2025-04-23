@@ -11,7 +11,7 @@ import { useState, useCallback, useRef } from 'react';
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const [answerState, setAnswerState] = useState('');
-
+  const shuffledAnswers = useRef();
   const activeQuestionIndex =
     answerState === '' ? userAnswers.length : userAnswers.length - 1;
   console.log(userAnswers);
@@ -63,9 +63,10 @@ const Quiz = () => {
         />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <Answers
+          key={activeQuestionIndex}
           answerState={answerState}
-          onSelect={onHandleAnswerClick}
           userAnswers={userAnswers[userAnswers.length - 1]}
+          onSelect={onHandleAnswerClick}
           questions={QUESTIONS[activeQuestionIndex]}
         />
       </div>
