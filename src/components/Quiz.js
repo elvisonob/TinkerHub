@@ -1,6 +1,7 @@
 import QUESTIONS from '../questions.js';
 import Summary from './Summary';
 import QuestionTimer from './QuestionTimer';
+import Answers from './Answers';
 import { useState, useCallback, useRef } from 'react';
 
 //Now, when an answer is clicked, it should show a yellow color first, and
@@ -11,7 +12,6 @@ const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const [answerState, setAnswerState] = useState('');
 
-  const shuffledAnswers = useRef();
   const activeQuestionIndex =
     answerState === '' ? userAnswers.length : userAnswers.length - 1;
   console.log(userAnswers);
@@ -29,6 +29,10 @@ const Quiz = () => {
         } else {
           setAnswerState('wrong');
         }
+
+        setTimeout(() => {
+          setAnswerState('');
+        }, 2000);
       }, 1000);
     },
     [activeQuestionIndex]
@@ -49,9 +53,6 @@ const Quiz = () => {
     );
   }
 
-  shuffledAnswers.current = [...QUESTIONS[activeQuestionIndex].answers];
-  shuffledAnswers.current.sort(() => Math.random() - 0.5);
-
   return (
     <div className="container">
       <div className="quiz">
@@ -61,28 +62,12 @@ const Quiz = () => {
           onTimeout={onHandleSkipAnswer}
         />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
-        {shuffledAnswers.current.map((answer) => {
-          let isSelected = answer === userAnswers[userAnswers.length - 1];
-          // if answer is picked and answer is not equal to correct or wrong,
-          let cssClass = '';
-          if (
-            isSelected &&
-            (answerState !== 'correct' || answerState !== 'wrong')
-          ) {
-            cssClass = 'selected';
-          }
-
-          return (
-            <li key={answer}>
-              <button
-                onClick={() => onHandleAnswerClick(answer)}
-                className={cssClass}
-              >
-                {answer}
-              </button>
-            </li>
-          );
-        })}
+        <Answers
+          answerState={answerState}
+          onSelect={onHandleAnswerClick}
+          userAnswers={userAnswers[userAnswers.length - 1]}
+          questions={QUESTIONS[activeQuestionIndex]}
+        />
       </div>
     </div>
   );
