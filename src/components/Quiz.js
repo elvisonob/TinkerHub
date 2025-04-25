@@ -1,7 +1,6 @@
 import QUESTIONS from '../questions.js';
 import Summary from './Summary';
 import QuestionTimer from './QuestionTimer';
-import Answers from './Answers';
 import { useState, useCallback, useRef } from 'react';
 
 //Now, when an answer is clicked, it should show a yellow color first, and
@@ -53,6 +52,11 @@ const Quiz = () => {
     );
   }
 
+  if (!shuffledAnswers.current) {
+    shuffledAnswers.current = [...QUESTIONS[activeQuestionIndex].answers];
+    shuffledAnswers.current.sort(() => Math.random() - 0.5);
+  }
+
   return (
     <div className="container">
       <div className="quiz">
@@ -62,13 +66,6 @@ const Quiz = () => {
           onTimeout={onHandleSkipAnswer}
         />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
-        <Answers
-          key={activeQuestionIndex}
-          answerState={answerState}
-          userAnswers={userAnswers[userAnswers.length - 1]}
-          onSelect={onHandleAnswerClick}
-          questions={QUESTIONS[activeQuestionIndex]}
-        />
       </div>
     </div>
   );
