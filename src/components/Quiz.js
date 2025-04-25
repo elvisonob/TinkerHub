@@ -2,6 +2,7 @@ import QUESTIONS from '../questions.js';
 import Summary from './Summary';
 import QuestionTimer from './QuestionTimer';
 import { useState, useCallback, useRef } from 'react';
+import Answers from './Answers';
 
 //Now, when an answer is clicked, it should show a yellow color first, and
 // if it is the right answer, it should then change to green
@@ -10,7 +11,7 @@ import { useState, useCallback, useRef } from 'react';
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const [answerState, setAnswerState] = useState('');
-  const shuffledAnswers = useRef();
+
   const activeQuestionIndex =
     answerState === '' ? userAnswers.length : userAnswers.length - 1;
   console.log(userAnswers);
@@ -52,11 +53,6 @@ const Quiz = () => {
     );
   }
 
-  if (!shuffledAnswers.current) {
-    shuffledAnswers.current = [...QUESTIONS[activeQuestionIndex].answers];
-    shuffledAnswers.current.sort(() => Math.random() - 0.5);
-  }
-
   return (
     <div className="container">
       <div className="quiz">
@@ -66,6 +62,13 @@ const Quiz = () => {
           onTimeout={onHandleSkipAnswer}
         />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
+        <Answers
+          key={activeQuestionIndex}
+          answers={QUESTIONS[activeQuestionIndex].answers}
+          userAnswers={userAnswers[userAnswers.length - 1]}
+          answerState={answerState}
+          onSelectAnswer={onHandleAnswerClick}
+        />
       </div>
     </div>
   );
