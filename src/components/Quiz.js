@@ -1,12 +1,7 @@
 import QUESTIONS from '../questions.js';
 import Summary from './Summary';
-import QuestionTimer from './QuestionTimer';
-import { useState, useCallback, useRef } from 'react';
-import Answers from './Answers';
-
-//Now, when an answer is clicked, it should show a yellow color first, and
-// if it is the right answer, it should then change to green
-// if wrong answer, it should change to red
+import QuestionAnswer from './QuestionAnswer';
+import { useState, useCallback } from 'react';
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
@@ -55,21 +50,14 @@ const Quiz = () => {
 
   return (
     <div className="container">
-      <div className="quiz">
-        <QuestionTimer
-          key={activeQuestionIndex}
-          timer={10000}
-          onTimeout={onHandleSkipAnswer}
-        />
-        <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
-        <Answers
-          key={activeQuestionIndex}
-          answers={QUESTIONS[activeQuestionIndex].answers}
-          userAnswers={userAnswers[userAnswers.length - 1]}
-          answerState={answerState}
-          onSelectAnswer={onHandleAnswerClick}
-        />
-      </div>
+      <QuestionAnswer
+        key={activeQuestionIndex}
+        onTimeout={onHandleSkipAnswer}
+        userAnswers={[userAnswers[userAnswers.length - 1]]}
+        answerState={answerState}
+        onSelectAnswer={onHandleAnswerClick}
+        questionPrefix={QUESTIONS[activeQuestionIndex]}
+      />
     </div>
   );
 };

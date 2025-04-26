@@ -11,7 +11,7 @@ const Answers = ({ userAnswers, answerState, onSelectAnswer, answers }) => {
     <div>
       {shuffledAnswers.current.map((answer) => {
         const isSelected = userAnswers === answer;
-        // the answer should change when moved to a new question,
+
         let cssClass = '';
 
         if (answerState === 'selected' && isSelected) {
