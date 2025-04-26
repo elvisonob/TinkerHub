@@ -7,14 +7,15 @@ const QuestionAnswer = ({
   userAnswers,
   answerState,
   onSelectAnswer,
-  questionPrefix,
+  question,
+  answer1,
 }) => {
   return (
     <div className="quiz">
       <QuestionTimer timer={10000} onTimeout={onTimeout} />
-      <h2>{questionPrefix.text}</h2>
+      <h2>{question}</h2>
       <Answers
-        answers={questionPrefix.answers}
+        answers={answer1}
         userAnswers={userAnswers}
         answerState={answerState}
         onSelectAnswer={onSelectAnswer}

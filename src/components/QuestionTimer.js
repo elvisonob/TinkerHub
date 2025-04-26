@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
 
-// I want the timer not to continue running into the second question
-
-//I want the question to move to the next question even when it is null
-
 const QuestionTimer = ({ timer, onTimeout }) => {
   const [remainingTime, setRemainingTime] = useState(timer);
   useEffect(() => {

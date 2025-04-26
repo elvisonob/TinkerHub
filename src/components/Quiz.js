@@ -53,10 +53,11 @@ const Quiz = () => {
       <QuestionAnswer
         key={activeQuestionIndex}
         onTimeout={onHandleSkipAnswer}
-        userAnswers={[userAnswers[userAnswers.length - 1]]}
+        userAnswers={userAnswers[userAnswers.length - 1]}
         answerState={answerState}
         onSelectAnswer={onHandleAnswerClick}
-        questionPrefix={QUESTIONS[activeQuestionIndex]}
+        question={QUESTIONS[activeQuestionIndex].text}
+        answer1={QUESTIONS[activeQuestionIndex].answers}
       />
     </div>
   );
