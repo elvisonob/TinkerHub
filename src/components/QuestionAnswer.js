@@ -1,6 +1,7 @@
 // bring the QuestionTimer and Answers here
 import QuestionTimer from './QuestionTimer';
 import Answers from './Answers';
+import React, { useState } from 'react';
 
 const QuestionAnswer = ({
   onTimeout,
@@ -10,6 +11,8 @@ const QuestionAnswer = ({
   question,
   answer1,
 }) => {
+  //Now, i need to bring userAnswers and answerState functionality to
+  //QuestionAnswer component i.e bringing state down.
   return (
     <div className="quiz">
       <QuestionTimer timer={10000} onTimeout={onTimeout} />
