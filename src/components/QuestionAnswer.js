@@ -2,26 +2,50 @@
 import QuestionTimer from './QuestionTimer';
 import Answers from './Answers';
 import React, { useState } from 'react';
+import QUESTIONS from '../questions.js';
 
-const QuestionAnswer = ({
-  onTimeout,
-  userAnswers,
-  answerState,
-  onSelectAnswer,
-  question,
-  answer1,
-}) => {
-  //Now, i need to bring userAnswers and answerState functionality to
-  //QuestionAnswer component i.e bringing state down.
+const QuestionAnswer = ({ onTimeout, index, onSelectAnswer }) => {
+  const [answer, setAnswer] = useState({
+    selectedAnswer: '',
+    isCorrect: null,
+  });
+
+  const handleClickAnswer = (answer) => {
+    setAnswer({
+      selectedAnswer: answer,
+      isCorrect: null,
+    });
+
+    setTimeout(() => {
+      setAnswer({
+        selectedAnswer: answer,
+        isCorrect: QUESTIONS[index].answers[0] === answer,
+      });
+    }, 1000);
+
+    setTimeout(() => {
+      onSelectAnswer(answer);
+    }, 2000);
+  };
+
+  // if there is a clicked answer and answer is correct, answerState
+  // should be green, if wrong, red, if just selected, selected
+
+  let answerState = '';
+
+  if (answer.selectedAnswer) {
+    answerState = answer.isCorrect ? 'correct' : 'wrong';
+  }
+
   return (
     <div className="quiz">
       <QuestionTimer timer={10000} onTimeout={onTimeout} />
-      <h2>{question}</h2>
+      <h2>{QUESTIONS[index].text}</h2>
       <Answers
-        answers={answer1}
-        userAnswers={userAnswers}
+        answers={QUESTIONS[index].answers}
         answerState={answerState}
-        onSelectAnswer={onSelectAnswer}
+        onSelectAnswer={handleClickAnswer}
+        userAnswers={answer.selectedAnswer}
       />
     </div>
   );
