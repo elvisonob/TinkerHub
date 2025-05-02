@@ -19,6 +19,7 @@ const Quiz = () => {
     function onHandleSkipAnswer() {
       onHandleAnswerClick(null);
     },
+    //return
     [onHandleAnswerClick]
   );
 
