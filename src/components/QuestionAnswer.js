@@ -33,6 +33,8 @@ const QuestionAnswer = ({ onTimeout, index, onSelectAnswer }) => {
 
   let answerState = '';
 
+  let timer = '';
+
   if (answer.selectedAnswer && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? 'correct' : 'wrong';
   } else if (answer.selectedAnswer) {
