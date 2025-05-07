@@ -28,12 +28,17 @@ const QuestionAnswer = ({ onTimeout, index, onSelectAnswer }) => {
     }, 2000);
   };
 
-  // if there is a clicked answer and answer is correct, answerState
-  // should be green, if wrong, red, if just selected, selected
-
   let answerState = '';
 
-  let timer = '';
+  let timer = 10000;
+
+  if (answer.selectedAnswer) {
+    timer = 1000;
+  }
+
+  if (answer.isCorrect !== null) {
+    timer = 2000;
+  }
 
   if (answer.selectedAnswer && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? 'correct' : 'wrong';
@@ -43,7 +48,11 @@ const QuestionAnswer = ({ onTimeout, index, onSelectAnswer }) => {
 
   return (
     <div className="quiz">
-      <QuestionTimer timer={10000} onTimeout={onTimeout} />
+      <QuestionTimer
+        key={timer}
+        timer={timer}
+        onTimeout={answer.selectedAnswer === '' ? onTimeout : null}
+      />
       <h2>{QUESTIONS[index].text}</h2>
       <Answers
         answers={QUESTIONS[index].answers}
