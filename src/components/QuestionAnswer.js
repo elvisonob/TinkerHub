@@ -43,6 +43,7 @@ const QuestionAnswer = ({ onTimeout, index, onSelectAnswer }) => {
   if (answer.selectedAnswer && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? 'correct' : 'wrong';
   } else if (answer.selectedAnswer) {
+    //will solve 100% on my own!
     answerState = 'selected';
   }
 
