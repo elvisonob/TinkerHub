@@ -1,5 +1,5 @@
 const Summary = () => {
-  return <h1>QUIZ COMPLETE</h1>;
+  return <div>QUIZ COMPLETED</div>;
 };
 
 export default Summary;
