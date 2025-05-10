@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import QUESTIONS from '../questions.js';
 import Summary from './Summary.js';
 import QuestionTimer from './QuestionTimer.js';
@@ -12,6 +12,7 @@ import QuestionTimer from './QuestionTimer.js';
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const [answerState, setAnswerState] = useState('');
+  const shuffledAnswers = useRef();
   console.log(userAnswers);
 
   const activeQuestionIndex =
@@ -32,11 +33,11 @@ const Quiz = () => {
         } else {
           setAnswerState('wrong');
         }
-      }, 1000);
 
-      setTimeout(() => {
-        setAnswerState('');
-      }, 2000);
+        setTimeout(() => {
+          setAnswerState('');
+        }, 2000);
+      }, 1000);
     },
     [activeQuestionIndex]
   );
@@ -54,10 +55,12 @@ const Quiz = () => {
       </div>
     );
   }
+  if (!shuffledAnswers.current) {
+    shuffledAnswers.current = [...QUESTIONS[activeQuestionIndex].answers];
 
-  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
+    shuffledAnswers.current.sort(() => Math.random() - 0.5);
+  }
 
-  const sortedAnswers = shuffledAnswers.sort(() => Math.random() - 0.5);
   return (
     <div className="container">
       <div className="quiz">
@@ -68,11 +71,31 @@ const Quiz = () => {
         />
         <h1>{QUESTIONS[activeQuestionIndex].text}</h1>
         <ul>
-          {sortedAnswers.map((answer) => (
-            <li key={answer} onClick={() => onhandleAnswerClick(answer)}>
-              {answer}
-            </li>
-          ))}
+          {shuffledAnswers.current.map((answer) => {
+            let isSelected = answer === userAnswers[userAnswers.length - 1];
+            let cssClass;
+            //if answer is Selected and it is the correct answer,
+            //green
+            if (isSelected && answerState === 'selected') {
+              cssClass = 'selected';
+            }
+
+            if (
+              isSelected &&
+              (answerState === 'correct' || answerState === 'wrong')
+            ) {
+              cssClass = answerState;
+            }
+            return (
+              <li
+                key={answer}
+                onClick={() => onhandleAnswerClick(answer)}
+                className={cssClass}
+              >
+                {answer}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
