@@ -4,20 +4,18 @@ const QuestionTimer = ({ timer, onTimeout }) => {
   const [remainingTime, setRemainingTime] = useState(timer);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setRemainingTime((prev) => {
-        return prev - 100;
-      });
-
-      return () => clearInterval(intervalId);
-    }, 100);
-  }, []);
-
-  useEffect(() => {
+    console.log('Timer component');
     const timeoutId = setTimeout(onTimeout, timer);
 
     return () => clearTimeout(timeoutId);
   }, [onTimeout, timer]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setRemainingTime((prev) => prev - 100);
+    }, 100);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div>
@@ -27,6 +25,3 @@ const QuestionTimer = ({ timer, onTimeout }) => {
 };
 
 export default QuestionTimer;
-
-// Now, i have added a question timer, the plan is that
-// when the timer finishes, we move to the next question
