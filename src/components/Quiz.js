@@ -2,6 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import QUESTIONS from '../questions.js';
 import Summary from './Summary.js';
 import QuestionTimer from './QuestionTimer.js';
+import Answers from './Answers.js';
 
 //Now, when my answer is clicked, I want it to take a 1 second
 // to show a yellow color, and then after two seconds, it should
@@ -70,33 +71,13 @@ const Quiz = () => {
           onTimeout={onSkipAnswer}
         />
         <h1>{QUESTIONS[activeQuestionIndex].text}</h1>
-        <ul>
-          {shuffledAnswers.current.map((answer) => {
-            let isSelected = answer === userAnswers[userAnswers.length - 1];
-            let cssClass;
-            //if answer is Selected and it is the correct answer,
-            //green
-            if (isSelected && answerState === 'selected') {
-              cssClass = 'selected';
-            }
-
-            if (
-              isSelected &&
-              (answerState === 'correct' || answerState === 'wrong')
-            ) {
-              cssClass = answerState;
-            }
-            return (
-              <li
-                key={answer}
-                onClick={() => onhandleAnswerClick(answer)}
-                className={cssClass}
-              >
-                {answer}
-              </li>
-            );
-          })}
-        </ul>
+        <Answers
+          key={activeQuestionIndex}
+          shuffledAnswers={shuffledAnswers}
+          answerState={answerState}
+          answerIndex={userAnswers[userAnswers.length - 1]}
+          onSelect={onhandleAnswerClick}
+        />
       </div>
     </div>
   );
