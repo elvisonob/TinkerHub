@@ -1,37 +1,41 @@
-const Answers = ({
-  shuffledAnswers,
-  answerIndex,
-  key,
-  answerState,
-  onSelect,
-}) => {
+import { useRef } from 'react';
+
+const Answers = ({ answers, answerIndex, answerState, onSelect }) => {
+  const shuffledAnswers = useRef();
+  if (!shuffledAnswers.current) {
+    shuffledAnswers.current = [...answers];
+
+    shuffledAnswers.current.sort(() => Math.random() - 0.5);
+  }
   return (
-    <ul>
-      {shuffledAnswers.current.map((answer) => {
-        let isSelected = answer === answerIndex;
-        let cssClass;
+    <div>
+      <ul>
+        {shuffledAnswers.current.map((answer) => {
+          let isSelected = answer === answerIndex;
+          let cssClass;
 
-        if (isSelected && answerState === 'selected') {
-          cssClass = 'selected';
-        }
+          if (isSelected && answerState === 'selected') {
+            cssClass = 'selected';
+          }
 
-        if (
-          isSelected &&
-          (answerState === 'correct' || answerState === 'wrong')
-        ) {
-          cssClass = answerState;
-        }
-        return (
-          <li
-            key={answer}
-            onClick={() => onSelect(answer)}
-            className={cssClass}
-          >
-            {answer}
-          </li>
-        );
-      })}
-    </ul>
+          if (
+            isSelected &&
+            (answerState === 'correct' || answerState === 'wrong')
+          ) {
+            cssClass = answerState;
+          }
+          return (
+            <li
+              key={answer}
+              onClick={() => onSelect(answer)}
+              className={cssClass}
+            >
+              {answer}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 
