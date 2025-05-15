@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-const Answers = ({ answers, answerIndex, answerState, onSelect }) => {
+const Answers = ({ answers, selectedAnswer, answerState, onSelect }) => {
   const shuffledAnswers = useRef();
   if (!shuffledAnswers.current) {
     shuffledAnswers.current = [...answers];
@@ -11,7 +11,7 @@ const Answers = ({ answers, answerIndex, answerState, onSelect }) => {
     <div>
       <ul>
         {shuffledAnswers.current.map((answer) => {
-          let isSelected = answer === answerIndex;
+          let isSelected = answer === selectedAnswer;
           let cssClass;
 
           if (isSelected && answerState === 'selected') {

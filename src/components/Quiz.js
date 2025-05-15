@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 
 import Summary from './Summary.js';
 import QUESTIONS from '../questions.js';
@@ -52,12 +52,11 @@ const Quiz = () => {
     );
   }
 
-  // I need my answers itself to change
   return (
     <div className="container">
       <QuestionAnswers
         key={activeQuestionIndex}
-        activeQuestionIndex={activeQuestionIndex}
+        questions={QUESTIONS[activeQuestionIndex].text}
         answers={QUESTIONS[activeQuestionIndex].answers}
         onhandleAnswerClick={onhandleAnswerClick}
         onSkipAnswer={onSkipAnswer}
