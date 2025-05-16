@@ -3,12 +3,7 @@ import Answers from './Answers.js';
 import { useState } from 'react';
 import QUESTIONS from '../questions.js';
 
-const QuestionAnswers = ({
-  selectedAnswer,
-  onSkipAnswer,
-  onhandleAnswerClick,
-  index,
-}) => {
+const QuestionAnswers = ({ onSkipAnswer, onhandleAnswerClick, index }) => {
   const [answer, setAnswer] = useState({
     selectAnswer: '',
     isCorrect: null,

@@ -5,35 +5,16 @@ import QuestionAnswers from './QuestionAnswers.js';
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
-  const [answerState, setAnswerState] = useState('');
 
   console.log(userAnswers);
 
-  const activeQuestionIndex =
-    answerState === '' ? userAnswers.length : userAnswers.length - 1;
+  const activeQuestionIndex = userAnswers.length;
 
-  const onhandleAnswerClick = useCallback(
-    (answer) => {
-      setAnswerState('selected');
-
-      setUserAnswers((prev) => {
-        return [...prev, answer];
-      });
-
-      setTimeout(() => {
-        if (answer === QUESTIONS[activeQuestionIndex].answers[0]) {
-          setAnswerState('correct');
-        } else {
-          setAnswerState('wrong');
-        }
-
-        setTimeout(() => {
-          setAnswerState('');
-        }, 2000);
-      }, 1000);
-    },
-    [activeQuestionIndex]
-  );
+  const onhandleAnswerClick = useCallback((answer) => {
+    setUserAnswers((prev) => {
+      return [...prev, answer];
+    });
+  }, []);
 
   const onSkipAnswer = useCallback(() => {
     onhandleAnswerClick(null);
@@ -56,8 +37,6 @@ const Quiz = () => {
         index={activeQuestionIndex}
         onhandleAnswerClick={onhandleAnswerClick}
         onSkipAnswer={onSkipAnswer}
-        answerState={answerState}
-        selectedAnswer={userAnswers[userAnswers.length - 1]}
       />
     </div>
   );
