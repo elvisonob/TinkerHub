@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
-
 import Summary from './Summary.js';
 import QUESTIONS from '../questions.js';
-
 import QuestionAnswers from './QuestionAnswers.js';
 
 const Quiz = () => {
@@ -23,7 +21,6 @@ const Quiz = () => {
       });
 
       setTimeout(() => {
-        // if selected-answer is correct, show green
         if (answer === QUESTIONS[activeQuestionIndex].answers[0]) {
           setAnswerState('correct');
         } else {
@@ -56,6 +53,7 @@ const Quiz = () => {
     <div className="container">
       <QuestionAnswers
         key={activeQuestionIndex}
+        index={activeQuestionIndex}
         questions={QUESTIONS[activeQuestionIndex].text}
         answers={QUESTIONS[activeQuestionIndex].answers}
         onhandleAnswerClick={onhandleAnswerClick}
