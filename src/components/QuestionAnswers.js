@@ -7,8 +7,6 @@ const QuestionAnswers = ({
   selectedAnswer,
   onSkipAnswer,
   onhandleAnswerClick,
-  answers,
-  questions,
   index,
 }) => {
   const [answer, setAnswer] = useState({
@@ -21,6 +19,7 @@ const QuestionAnswers = ({
       selectAnswer: answer,
       isCorrect: null,
     });
+
     setTimeout(() => {
       setAnswer({
         selectAnswer: answer,
@@ -34,19 +33,20 @@ const QuestionAnswers = ({
   };
 
   let answerState = '';
-  // if question is correct, answer is correct or when wrong, wrong
-  if (answer.selectAnswer) {
+  if (answer.selectAnswer && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? 'correct' : 'wrong';
+  } else if (answer.selectAnswer) {
+    answerState = 'selected';
   }
 
   return (
     <div className="quiz">
       <QuestionTimer timer={10000} onTimeout={onSkipAnswer} />
-      <h1>{questions}</h1>
+      <h1>{QUESTIONS[index].text}</h1>
       <Answers
-        answers={answers}
+        answers={QUESTIONS[index].answers}
         answerState={answerState}
-        selectedAnswer={selectedAnswer}
+        selectedAnswer={answer.selectAnswer}
         onSelect={onhandleSelectAnswer}
       />
     </div>

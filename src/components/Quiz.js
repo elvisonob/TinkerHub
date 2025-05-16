@@ -54,8 +54,6 @@ const Quiz = () => {
       <QuestionAnswers
         key={activeQuestionIndex}
         index={activeQuestionIndex}
-        questions={QUESTIONS[activeQuestionIndex].text}
-        answers={QUESTIONS[activeQuestionIndex].answers}
         onhandleAnswerClick={onhandleAnswerClick}
         onSkipAnswer={onSkipAnswer}
         answerState={answerState}
