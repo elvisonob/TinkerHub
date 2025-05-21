@@ -7,7 +7,9 @@ const QuestionTimer = ({ timer, onTimeout }) => {
     console.log('Timer component');
     const timeoutId = setTimeout(onTimeout, timer);
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [onTimeout, timer]);
 
   useEffect(() => {
@@ -15,7 +17,9 @@ const QuestionTimer = ({ timer, onTimeout }) => {
     const intervalId = setInterval(() => {
       setRemainingTime((prev) => prev - 100);
     }, 100);
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (

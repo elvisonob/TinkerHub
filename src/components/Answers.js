@@ -23,11 +23,13 @@ const Answers = ({ answers, selectedAnswer, answerState, onSelect }) => {
         ) {
           cssClass = answerState;
         }
+
         return (
           <li
             key={answer}
             onClick={() => onSelect(answer)}
             className={cssClass}
+            disabled={answerState !== ''}
           >
             {answer}
           </li>

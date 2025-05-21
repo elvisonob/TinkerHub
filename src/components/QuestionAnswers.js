@@ -9,6 +9,16 @@ const QuestionAnswers = ({ onSkipAnswer, onhandleAnswerClick, index }) => {
     isCorrect: null,
   });
 
+  let timer = 10000;
+
+  if (answer.selectAnswer) {
+    timer = 1000;
+  }
+
+  if (answer.isCorrect !== null) {
+    timer = 2000;
+  }
+
   const onhandleSelectAnswer = (answer) => {
     setAnswer({
       selectAnswer: answer,
@@ -34,21 +44,9 @@ const QuestionAnswers = ({ onSkipAnswer, onhandleAnswerClick, index }) => {
     answerState = 'selected';
   }
 
-  let timer = 10000;
-
-  // if answer has been selected, there should be a fresh quick timer
-
-  if (answer.selectAnswer) {
-    timer = 2000;
-  }
-
-  if (answer.selectAnswer && answer.isCorrect !== null) {
-    timer = 1000;
-  }
-
   return (
     <div className="quiz">
-      <QuestionTimer timer={timer} onTimeout={onSkipAnswer} />
+      <QuestionTimer key={timer} timer={timer} onTimeout={onSkipAnswer} />
       <h1>{QUESTIONS[index].text}</h1>
       <Answers
         answers={QUESTIONS[index].answers}
