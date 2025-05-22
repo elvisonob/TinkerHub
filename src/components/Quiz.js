@@ -4,15 +4,37 @@ import Summary from './Summary.js';
 import QuestionTimer from './QuestionTimer';
 
 const Quiz = () => {
+  //adding dynamic colors
+
   const [userAnswers, setUserAnswers] = useState([]);
+  const [answerState, setAnswerState] = useState('');
 
   console.log(userAnswers);
 
-  const activeQuestionIndex = userAnswers.length;
+  const activeQuestionIndex =
+    answerState === '' ? userAnswers.length : userAnswers.length - 1;
 
-  const onhandleAnswerClick = useCallback((answer) => {
-    setUserAnswers((prev) => [...prev, answer]);
-  }, []);
+  const onhandleAnswerClick = useCallback(
+    (answer) => {
+      setAnswerState('selected');
+      setUserAnswers((prev) => [...prev, answer]);
+
+      setTimeout(() => {
+        // if right answer, setAnswerState to correct, else wrong
+
+        if (QUESTIONS[activeQuestionIndex].answers[0] === answer) {
+          setAnswerState('correct');
+        } else {
+          setAnswerState('wrong');
+        }
+
+        setTimeout(() => {
+          setAnswerState('');
+        }, 2000);
+      }, 1000);
+    },
+    [activeQuestionIndex]
+  );
 
   const onSkipAnswer = useCallback(() => {
     onhandleAnswerClick(null);
@@ -40,11 +62,32 @@ const Quiz = () => {
           />
           <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
           <ul>
-            {shuffledAnswers.map((answer) => (
-              <li key={answer} onClick={() => onhandleAnswerClick(answer)}>
-                {answer}
-              </li>
-            ))}
+            {shuffledAnswers.map((answer) => {
+              let cssClass = '';
+
+              const isSelected = answer === userAnswers[userAnswers.length - 1];
+
+              if (isSelected) {
+                cssClass = answerState;
+              }
+
+              if (
+                isSelected &&
+                (answerState === 'correct' || answerState === 'wrong')
+              ) {
+                cssClass = answerState;
+              }
+
+              return (
+                <li
+                  key={answer}
+                  onClick={() => onhandleAnswerClick(answer)}
+                  className={cssClass}
+                >
+                  {answer}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
