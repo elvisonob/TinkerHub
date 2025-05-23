@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
 import QUESTIONS from '../questions.js';
 import Summary from './Summary.js';
-import QuestionTimer from './QuestionTimer';
+
+import QuestionAnswers from './QuestionAnswers';
 
 const Quiz = () => {
   //adding dynamic colors
@@ -48,48 +49,20 @@ const Quiz = () => {
     );
   }
 
-  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
-
-  shuffledAnswers.sort(() => Math.random() - 0.5);
   return (
     <div className="container">
       <div className="quiz">
-        <div>
-          <QuestionTimer
-            key={activeQuestionIndex}
-            timer={10000}
-            onTimeout={onSkipAnswer}
-          />
-          <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
-          <ul>
-            {shuffledAnswers.map((answer) => {
-              let cssClass = '';
-
-              const isSelected = answer === userAnswers[userAnswers.length - 1];
-
-              if (isSelected) {
-                cssClass = answerState;
-              }
-
-              if (
-                isSelected &&
-                (answerState === 'correct' || answerState === 'wrong')
-              ) {
-                cssClass = answerState;
-              }
-
-              return (
-                <li
-                  key={answer}
-                  onClick={() => onhandleAnswerClick(answer)}
-                  className={cssClass}
-                >
-                  {answer}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <QuestionAnswers
+          key={activeQuestionIndex}
+          index={activeQuestionIndex}
+          timer={10000}
+          onTimeout={onSkipAnswer}
+          answers={QUESTIONS[activeQuestionIndex].answers}
+          selectedAnswer={userAnswers[userAnswers.length - 1]}
+          answerState={answerState}
+          questions={QUESTIONS[activeQuestionIndex].text}
+          onSelect={onhandleAnswerClick}
+        />
       </div>
     </div>
   );
