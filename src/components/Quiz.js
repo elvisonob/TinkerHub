@@ -8,34 +8,14 @@ const Quiz = () => {
   //adding dynamic colors
 
   const [userAnswers, setUserAnswers] = useState([]);
-  const [answerState, setAnswerState] = useState('');
 
   console.log(userAnswers);
 
-  const activeQuestionIndex =
-    answerState === '' ? userAnswers.length : userAnswers.length - 1;
+  const activeQuestionIndex = userAnswers.length;
 
-  const onhandleAnswerClick = useCallback(
-    (answer) => {
-      setAnswerState('selected');
-      setUserAnswers((prev) => [...prev, answer]);
-
-      setTimeout(() => {
-        // if right answer, setAnswerState to correct, else wrong
-
-        if (QUESTIONS[activeQuestionIndex].answers[0] === answer) {
-          setAnswerState('correct');
-        } else {
-          setAnswerState('wrong');
-        }
-
-        setTimeout(() => {
-          setAnswerState('');
-        }, 2000);
-      }, 1000);
-    },
-    [activeQuestionIndex]
-  );
+  const onhandleAnswerClick = useCallback((answer) => {
+    setUserAnswers((prev) => [...prev, answer]);
+  }, []);
 
   const onSkipAnswer = useCallback(() => {
     onhandleAnswerClick(null);
@@ -58,9 +38,6 @@ const Quiz = () => {
           timer={10000}
           onTimeout={onSkipAnswer}
           answers={QUESTIONS[activeQuestionIndex].answers}
-          selectedAnswer={userAnswers[userAnswers.length - 1]}
-          answerState={answerState}
-          questions={QUESTIONS[activeQuestionIndex].text}
           onSelect={onhandleAnswerClick}
         />
       </div>

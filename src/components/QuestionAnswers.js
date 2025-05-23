@@ -3,18 +3,7 @@ import Answers from './Answers.js';
 import { useState } from 'react';
 import QUESTIONS from '../questions.js';
 
-// now, i am bring the states down
-
-const QuestionAnswers = ({
-  selectedAnswer,
-  answers,
-  questions,
-  answerState,
-  timer,
-  onSelect,
-  onTimeout,
-  index,
-}) => {
+const QuestionAnswers = ({ answers, timer, onSelect, onTimeout, index }) => {
   const [answer, setAnswer] = useState({
     selected: '',
     isCorrect: null,
@@ -22,13 +11,13 @@ const QuestionAnswers = ({
 
   const onhandleAnswerSelect = (answer) => {
     setAnswer({
-      selected: 'selected',
+      selected: answer,
       isCorrect: null,
     });
 
     setTimeout(() => {
       setAnswer({
-        selected: 'selected',
+        selected: answer,
         isCorrect: answer === QUESTIONS[index].answers[0],
       });
 
@@ -40,12 +29,18 @@ const QuestionAnswers = ({
 
   let answerState = '';
 
+  if (answer.selected && answer.isCorrect !== null) {
+    answerState = answer.isCorrect ? 'correct' : 'wrong';
+  } else if (answer.selected) {
+    answerState = 'selected';
+  }
+
   return (
     <div>
       <QuestionTimer timer={timer} onTimeout={onTimeout} />
-      <h2>{questions}</h2>
+      <h2>{QUESTIONS[index].text}</h2>
       <Answers
-        selectedAnswer={selectedAnswer}
+        selectedAnswer={answer.selected}
         answers={answers}
         answerState={answerState}
         onSelect={onhandleAnswerSelect}
