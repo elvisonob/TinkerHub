@@ -52,4 +52,21 @@
   h1 {
     width: 100%;
   }
+  /* .menu-button__mobile {
+    height: 100%;
+  } */
+  .mobile-navlinks {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    justify-self: center;
+    list-style: none;
+    padding-top: 15rem;
+  }
+  .mobile-navlinks li {
+    display: flex;
+    justify-self: center;
+    padding: 40px;
+    margin: 1rem;
+  }
 }
