@@ -18,17 +18,17 @@ const MainHeader = () => {
   return (
     <Fragment>
       {drawerIsOpen && <BackDrop onClick={close} />}
-      {drawerIsOpen && (
-        <SideDrawer>
-          <nav className={classes['menu-button__mobile']}>
-            <ul className={classes['mobile-navlinks']}>
-              <li>Home</li>
-              <li>About</li>
-              <li>Portfolio</li>
-            </ul>
-          </nav>
-        </SideDrawer>
-      )}
+
+      <SideDrawer show={drawerIsOpen}>
+        <nav className={classes['menu-button__mobile']}>
+          <ul className={classes['mobile-navlinks']}>
+            <li>Home</li>
+            <li>About</li>
+            <li>Portfolio</li>
+          </ul>
+        </nav>
+      </SideDrawer>
+
       <div className={classes['main-header']}>
         <button className={classes['menu-button__span']} onClick={open}>
           <span />
