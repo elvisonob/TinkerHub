@@ -24,7 +24,7 @@ const MainHeader = () => {
           <ul className={classes['mobile-navlinks']}>
             <li>Home</li>
             <li>About</li>
-            <li>Portfoli</li>
+            <li>Portfolio</li>
           </ul>
         </nav>
       </SideDrawer>
@@ -35,7 +35,7 @@ const MainHeader = () => {
           <span />
           <span />
         </button>
-        <h1>Elvis-Tech</h1>
+        <h1>ElvisTech</h1>
         <nav className={classes['menu-button__header-nav']}>
           <ul className={classes['main-navlinks']}>
             <li>Home</li>
