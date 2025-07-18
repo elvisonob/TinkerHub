@@ -3,17 +3,31 @@ import NavLinks from './NavLinks.js';
 import classes from './MainNavigation.module.css';
 import SideDrawer from './SideDrawer.js';
 import { Fragment } from 'react';
+import { useState } from 'react';
+import Backdrop from '../UIElements/BackDrop.js';
 
 const MainNavigation = () => {
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+
+  const openDrawer = () => {
+    setDrawerIsOpen(true);
+  };
+
+  const closeDrawer = () => {
+    setDrawerIsOpen(false);
+  };
   return (
     <Fragment>
-      <MainHeader>
+      {drawerIsOpen && <Backdrop onClick={closeDrawer} />}
+      {drawerIsOpen && (
         <SideDrawer>
           <nav className={classes['nav__mobile']}>
             <NavLinks />
           </nav>
         </SideDrawer>
-        <button className={classes['mobile__button']}>
+      )}
+      <MainHeader>
+        <button className={classes['mobile__button']} onClick={openDrawer}>
           <span />
           <span />
           <span />

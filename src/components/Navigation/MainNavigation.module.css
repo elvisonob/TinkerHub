@@ -4,21 +4,26 @@
 
 @media (max-width: 768px) {
     .mobile__button {
-        display: block;
+        display: flex;
         width: 3rem;
         height: 3rem;
         border: none;
         background: transparent;
+        flex-direction: column;
+        justify-content: space-around;
+        cursor: pointer;
+        margin-right: 2rem;
     }
     .mobile__button span {
-        width: 100%;
-        background-color: white;
+        display: block;
+        background: white;
         height: 2.5px;
-        display: flex;
-        justify-content: space-around;
-        flex-direction: column;
+        width: 3rem;
     }
     .nav__desktop {
         display: none;
+    }
+    .nav__mobile {
+        height: 100%;
     }
 }

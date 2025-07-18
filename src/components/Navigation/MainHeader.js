@@ -1,7 +1,7 @@
 import classes from './MainHeader.module.css';
 
 const MainHeader = (props) => {
-  return <div className={classes.container}>{props.children}</div>;
+  return <header className={classes.container}>{props.children}</header>;
 };
 
 export default MainHeader;
