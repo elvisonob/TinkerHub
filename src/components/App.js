@@ -1,9 +1,9 @@
-import MainHeader from './Navigation/MainHeader.js';
+import MainNavigation from './Navigation/MainNavigation.js';
 
 const App = () => {
   return (
     <div>
-      <MainHeader />
+      <MainNavigation />
     </div>
   );
 };

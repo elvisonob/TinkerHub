@@ -1,0 +1,9 @@
+.navLinks {
+    display: flex;
+    list-style: none;
+    font-size: larger;
+}
+
+.navLinks li {
+    margin: 10px;
+}

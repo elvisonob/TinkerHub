@@ -1,0 +1,11 @@
+.side-drawer {
+    width: 60%;
+    background-color: white;
+    height: 100vh;
+}
+
+@media (min-width: 768px) {
+    .side-drawer {
+        display: none;
+    }
+}

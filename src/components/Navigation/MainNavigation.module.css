@@ -1,0 +1,24 @@
+.mobile__button {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile__button {
+        display: block;
+        width: 3rem;
+        height: 3rem;
+        border: none;
+        background: transparent;
+    }
+    .mobile__button span {
+        width: 100%;
+        background-color: white;
+        height: 2.5px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+    .nav__desktop {
+        display: none;
+    }
+}
