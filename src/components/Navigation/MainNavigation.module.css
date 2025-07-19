@@ -1,29 +1,36 @@
-.mobile__button {
+.mobile-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: none;
+    background: transparent;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+.mobile-button span {
+    width: 3rem;
+    height: 2.5px;
+    background-color: white;
+}
+
+.nav-mobile {
     display: none;
 }
 
-@media (max-width: 768px) {
-    .mobile__button {
-        display: flex;
-        width: 3rem;
-        height: 3rem;
-        border: none;
-        background: transparent;
-        flex-direction: column;
-        justify-content: space-around;
-        cursor: pointer;
-        margin-right: 2rem;
-    }
-    .mobile__button span {
-        display: block;
-        background: white;
-        height: 2.5px;
-        width: 3rem;
-    }
-    .nav__desktop {
+@media (min-width: 768px) {
+    .mobile-button {
         display: none;
     }
-    .nav__mobile {
-        height: 100%;
+}
+
+@media (max-width: 768px) {
+    .nav-desktop {
+        display: none;
+    }
+    h2 {
+        margin-right: 20rem;
     }
 }

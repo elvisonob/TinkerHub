@@ -1,13 +1,8 @@
-.container {
+.main-header {
     display: flex;
-    justify-content: space-between;
-    background: blue;
+    background-color: blue;
     color: white;
-    padding: 30px;
-    height: 5rem;
-    width: 100%;
-    position: fixed;
-    /* top: 0;
-    left: 0; */
-    /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.26); */
+    justify-content: space-between;
+    padding: 10px;
+    height: 4rem;
 }
