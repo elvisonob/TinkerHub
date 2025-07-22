@@ -1,8 +1,5 @@
-.main-header {
-    display: flex;
+.container {
     background-color: blue;
     color: white;
-    justify-content: space-between;
     padding: 10px;
-    height: 4rem;
 }
