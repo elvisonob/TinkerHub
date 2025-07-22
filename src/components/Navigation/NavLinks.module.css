@@ -1,1 +1,23 @@
-.navLinks {}
+.navLinks {
+  display: flex;
+  justify-content: space-between;
+  font-size: larger;
+  padding: 5px;
+}
+
+.navLinks ul {
+  display: flex;
+  list-style: none;
+}
+
+.navLinks li {
+  padding: 0 4rem;
+}
+
+@media (max-width: 768px) {
+  .navLinks ul {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  }
+}

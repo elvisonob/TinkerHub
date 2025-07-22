@@ -1,0 +1,26 @@
+.nav-bars {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-bars {
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .nav-bars span {
+    width: 3rem;
+    height: 2.5px;
+    background-color: white;
+  }
+  h2 {
+    padding-right: 20rem;
+  }
+  .desktop-navLink {
+    display: none;
+  }
+}
