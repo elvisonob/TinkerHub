@@ -1,26 +1,34 @@
-.nav-bars {
+.nav-mobile-bar {
+  display: none;
+}
+
+.mobile-nav-view {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .nav-bars {
+  .nav-mobile-bar {
     width: 3rem;
     height: 3rem;
-    border: none;
     background: transparent;
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
+    flex-direction: column;
+    border: none;
+    margin-right: 5rem;
   }
-  .nav-bars span {
-    width: 3rem;
+  .nav-mobile-bar span {
     height: 2.5px;
-    background-color: white;
+    width: 3rem;
+    background: white;
+  }
+  .desktop-nav-view {
+    display: none;
   }
   h2 {
-    padding-right: 20rem;
+    margin-right: 20rem;
   }
-  .desktop-navLink {
-    display: none;
+  .mobile-nav-view {
+    display: block;
   }
 }

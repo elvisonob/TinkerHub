@@ -1,7 +1,10 @@
 .container {
   background-color: blue;
   color: white;
-  padding: 10px;
+  width: 100%;
+  font-size: larger;
+  padding: 17px 20px;
   display: flex;
+  height: 5rem;
   justify-content: space-between;
 }

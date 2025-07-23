@@ -1,23 +1,24 @@
-.navLinks {
+.nav-link {
   display: flex;
-  justify-content: space-between;
   font-size: larger;
-  padding: 5px;
 }
 
-.navLinks ul {
-  display: flex;
+.nav-link li {
   list-style: none;
-}
-
-.navLinks li {
-  padding: 0 4rem;
+  margin: 0 3rem;
 }
 
 @media (max-width: 768px) {
-  .navLinks ul {
+  .nav-link {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav-link li {
+    padding: 40px;
+    cursor: pointer;
   }
 }

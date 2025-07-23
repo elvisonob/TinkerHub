@@ -1,9 +1,8 @@
-import MainHeader from './MainHeader.js';
+import MainHeader from './MainHeader';
 import NavLinks from './NavLinks.js';
 import classes from './MainNavigation.module.css';
-import { useState, Fragment } from 'react';
 import SideDrawer from './SideDrawer.js';
-import BackDrop from '../UIElements/BackDrop';
+import { useState, Fragment } from 'react';
 
 const MainNavigation = () => {
   const [drawerIsClose, setDrawerIsClose] = useState(false);
@@ -11,28 +10,23 @@ const MainNavigation = () => {
   const openDrawer = () => {
     setDrawerIsClose(true);
   };
-
-  const closeDrawer = () => {
-    setDrawerIsClose(false);
-  };
   return (
     <Fragment>
-      {drawerIsClose && <BackDrop onClick={closeDrawer} />}
       {drawerIsClose && (
         <SideDrawer>
-          <nav className={classes['mobile-navLink']}>
+          <nav className={classes['mobile-nav-view']}>
             <NavLinks />
           </nav>
         </SideDrawer>
       )}
       <MainHeader>
-        <button className={classes['nav-bars']} onClick={openDrawer}>
+        <button className={classes['nav-mobile-bar']} onClick={openDrawer}>
           <span />
           <span />
           <span />
         </button>
         <h2>Elvis-Tech</h2>
-        <nav className={classes['desktop-navLink']}>
+        <nav className={classes['desktop-nav-view']}>
           <NavLinks />
         </nav>
       </MainHeader>

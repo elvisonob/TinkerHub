@@ -1,9 +1,8 @@
 .side-drawer {
-  width: 60%;
-  z-index: 10;
+  background-color: pink;
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  background-color: pink;
+  width: 60%;
 }
