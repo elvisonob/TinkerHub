@@ -2,7 +2,7 @@ import MainHeader from './MainHeader';
 import NavLinks from './NavLinks.js';
 import classes from './MainNavigation.module.css';
 import SideDrawer from './SideDrawer.js';
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import BackDrop from '../UIElements/BackDrop';
 
 const MainNavigation = () => {
@@ -15,6 +15,22 @@ const MainNavigation = () => {
   const closeDrawer = () => {
     setDrawerIsClose(false);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setDrawerIsClose(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <Fragment>
       {drawerIsClose && <BackDrop onClick={closeDrawer} />}
