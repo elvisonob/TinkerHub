@@ -1,6 +1,6 @@
 import classes from './NavLinks.module.css';
 
-const NavLinks = () => {
+const NavLinks = (props) => {
   return (
     <ul className={classes['nav-link']}>
       <li>Home</li>
