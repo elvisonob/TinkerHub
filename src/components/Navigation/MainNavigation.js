@@ -25,7 +25,6 @@ const MainNavigation = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Cleanup event listener on unmount
     return () => {
       window.removeEventListener('resize', handleResize);
     };
