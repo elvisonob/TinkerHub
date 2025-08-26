@@ -5,7 +5,7 @@ const NavLinks = (props) => {
     <ul className={classes['nav-link']}>
       <li>Home</li>
       <li>About-Me</li>
-      <li>Portfolio</li>
+      <li>Portfolio 1</li>
     </ul>
   );
 };
