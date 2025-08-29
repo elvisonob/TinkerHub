@@ -4,8 +4,8 @@ const NavLinks = (props) => {
   return (
     <ul className={classes['nav-link']}>
       <li>Home</li>
-      <li>About-Me</li>
-      <li>Portfolio 2</li>
+      <li>About</li>
+      <li>Portfolio</li>
     </ul>
   );
 };
