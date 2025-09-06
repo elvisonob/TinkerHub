@@ -4,7 +4,7 @@ const NavLinks = (props) => {
   return (
     <ul className={classes['nav-link']}>
       <li>Home</li>
-      <li>About Elvis</li>
+      <li>About</li>
       <li>Portfolio</li>
     </ul>
   );
