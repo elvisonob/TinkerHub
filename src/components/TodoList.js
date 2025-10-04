@@ -1,8 +1,11 @@
-const TodoList = ({ todoList }) => {
+const TodoList = ({ todoList, onDelete }) => {
   return (
     <div>
       {todoList.map((list) => (
-        <div key={list.id}>{list.name}</div>
+        <div key={list.id}>
+          {list.name}
+          <button onClick={() => onDelete(list.id)}>DELETE</button>
+        </div>
       ))}
     </div>
   );

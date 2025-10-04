@@ -15,15 +15,20 @@ const Todo = () => {
     setInput('');
   };
 
+  const onDelete = (id) => {
+    setTodoList((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
   return (
     <div className="container">
       <h1>TODO APP with Jest Testing</h1>
-      <h2>ADD TODO</h2>
+      <h2>ADD TODOS</h2>
       <form onSubmit={onSubmit}>
         <input type="text" value={input} onChange={handleChange} />
       </form>
       <button>Enter</button>
-      <TodoList todoList={todoList} />
+
+      <TodoList todoList={todoList} onDelete={onDelete} />
     </div>
   );
 };
