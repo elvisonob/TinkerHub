@@ -21,13 +21,12 @@ const Todo = () => {
 
   return (
     <div className="container">
-      <h1>TODO APP with Jest Testing</h1>
+      <h1>TODO APP with Jest Test</h1>
       <h2>ADD TODOS</h2>
       <form onSubmit={onSubmit}>
         <input type="text" value={input} onChange={handleChange} />
       </form>
       <button>Enter</button>
-
       <TodoList todoList={todoList} onDelete={onDelete} />
     </div>
   );
