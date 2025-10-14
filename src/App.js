@@ -1,10 +1,10 @@
 import Todo from './components/Todo.js';
-import RootLayout from './Layout.js';
+import AreaChartComponent from './components/AreaChart';
 
 const App = () => {
   return (
     <div>
-      <RootLayout />
+      <AreaChartComponent />
     </div>
   );
 };

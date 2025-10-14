@@ -1,12 +1,14 @@
 'use client';
 
 import {
-  AreaChart,
-  Area,
-  ResponsiveContainer,
-  XAxis,
+  Bar,
+  BarChart,
   YAxis,
+  XAxis,
   CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  Legend,
 } from 'recharts';
 
 const productSales = [
@@ -44,28 +46,16 @@ const productSales = [
 
 const AreaChartComponent = () => {
   return (
-    <div style={{ width: '50%', height: 300 }}>
-      <ResponsiveContainer>
-        <AreaChart width={500} height={400} data={productSales}>
-          <YAxis />
-          <XAxis />
-          <CartesianGrid />
-          <Area
-            type="monotone"
-            fill="#3b82f6"
-            stroke="#2563eb"
-            dataKey="product1"
-            stackId="1"
-          />
-          <Area
-            type="monotone"
-            dataKey="product2"
-            fill="#8b5cf6"
-            stroke="#7c3aed"
-            stackId="1"
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+    <div>
+      <BarChart width={500} height={400} data={productSales}>
+        <XAxis dataKey="name" />
+        <YAxis />
+        <CartesianGrid strokeDasharray="5, 5" />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="product1" fill="blue" type="monotone" />
+        <Bar dataKey="product2" fill="purple" type="monotone" />
+      </BarChart>
     </div>
   );
 };
