@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  Bar,
-  BarChart,
+  Line,
+  LineChart,
   YAxis,
   XAxis,
   CartesianGrid,
@@ -47,15 +47,15 @@ const productSales = [
 const AreaChartComponent = () => {
   return (
     <div>
-      <BarChart width={500} height={400} data={productSales}>
+      <LineChart width={500} height={400} data={productSales}>
         <XAxis dataKey="name" />
         <YAxis />
         <CartesianGrid strokeDasharray="5, 5" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="product1" fill="blue" type="monotone" />
-        <Bar dataKey="product2" fill="purple" type="monotone" />
-      </BarChart>
+        <Line dataKey="product1" fill="blue" type="monotone" />
+        <Line dataKey="product2" fill="purple" type="monotone" />
+      </LineChart>
     </div>
   );
 };
