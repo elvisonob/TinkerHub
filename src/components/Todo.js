@@ -25,8 +25,9 @@ const Todo = () => {
       <h2>ADD TODOS</h2>
       <form onSubmit={onSubmit}>
         <input type="text" value={input} onChange={handleChange} />
+        <button>Enter</button>
       </form>
-      <button>Enter</button>
+
       <TodoList todoList={todoList} onDelete={onDelete} />
     </div>
   );

@@ -4,7 +4,7 @@ import AreaChartComponent from './components/AreaChart';
 const App = () => {
   return (
     <div>
-      <AreaChartComponent />
+      <Todo />
     </div>
   );
 };
