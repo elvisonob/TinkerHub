@@ -18,7 +18,7 @@ const productSales = [
   },
   {
     name: 'Feb',
-    product1: 3000,
+    product1: 3500,
     product2: 2210,
   },
   {
