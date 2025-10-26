@@ -11,7 +11,10 @@ const Todo = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setTodoList((prev) => [...prev, { id: Math.random(), name: input }]);
+    setTodoList((previous) => [
+      ...previous,
+      { id: Math.random(), name: input },
+    ]);
     setInput('');
   };
 
