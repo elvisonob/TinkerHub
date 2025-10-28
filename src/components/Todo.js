@@ -2,12 +2,10 @@ import { useState, useEffect } from 'react';
 
 const Todo = () => {
   const [directory, setDirectory] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch('https://jsonplaceholder.typicode.com/users');
       const data = await res.json();
-      console.log(data);
       setDirectory(data);
     };
 
@@ -15,17 +13,13 @@ const Todo = () => {
   }, []);
   return (
     <div className="container">
-      <div>
-        <h1>API Data Fetched</h1>
-      </div>
-
-      <div className="grid">
+      <h1>API Data fetched</h1>
+      <div className="data-box">
         {directory.map((dir) => (
-          <div className="card" key={dir.id}>
-            <div>Name: {dir.name}</div>
-            <div>Email: {dir.email}</div>
-            <div>Website: {dir.website}</div>
-            <div>Address: {dir.address.street}</div>
+          <div className="card">
+            <p>Name:{dir.name}</p>
+            <p>Email:{dir.email}</p>
+            <p>Website:{dir.website}</p>
           </div>
         ))}
       </div>
