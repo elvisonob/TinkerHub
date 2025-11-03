@@ -1,37 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const Todo = () => {
   const [text, setText] = useState('');
-  const [todoList, setTodoList] = useState([]);
-
-  const onInput = (e) => {
-    setText(e.target.value);
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setTodoList((prev) => {
-      return [...prev, { id: Math.random(), todo: text }];
-    });
-    setText('');
+    console.log(text);
   };
-
   return (
     <div className="container">
-      <h1>TODO APP</h1>
-      <div>Add a TodoList</div>
-      <div>
-        <form onClick={onSubmit}>
-          <input type="text" id="text" onChange={onInput} value={text} />
-          <button>ENTER</button>
-        </form>
-      </div>
-      <div>
-        <p>List of todos</p>
-        {todoList.map((todo) => (
-          <div key={todo.id}>{todo.todo}</div>
-        ))}
-      </div>
+      <h1>TODO PAGE</h1>
+      <h3>Add a Todo</h3>
+      <form onSubmit={onSubmit}>
+        <input
+          id="text"
+          type="text"
+          value={text}
+          onChange={(e) => e.target.value}
+        />
+        <button>Enter</button>
+      </form>
+      <h2>LIST OF TODO</h2>
     </div>
   );
 };
