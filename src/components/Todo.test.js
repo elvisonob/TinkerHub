@@ -19,17 +19,21 @@ test('App loads on page', () => {
   expect(listTodo).toBeInTheDocument();
 });
 
-test('User types on page', () => {
+test('User types on page', async () => {
   // user types and user clicks enter
   //something shows up in the list of todo
 
   render(<Todo />);
-const userInput = screen.getByPlaceholderText('type-todo')
- waitFor user.type(userInput);
- waitFor user.click('button');
 
- const listTodo = screen.getByText('LIST OF TODO');
- expect(listTodo).toHaveLength(1);
+  const input = screen.getByRole('textbox');
 
+  await user.click(input);
+  await user.type(input, 'I am a Billionaire');
 
+  const button = screen.getByRole('button');
+  await user.click(button);
+
+  const todo = await screen.findByText('I am a Billionaire');
+
+  expect(todo).toBeInTheDocument();
 });
