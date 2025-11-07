@@ -21,19 +21,18 @@ const Todo = () => {
   return (
     <div className="container">
       <h1>TODO PAGE</h1>
-      <h3>Add a Todo</h3>
+      <label htmlFor="todoList">Add a Todo</label>
       <form onSubmit={onSubmit}>
         <input
-          id="text"
+          id="todoList"
           type="text"
           value={text}
-          placeholder="type-todo"
           onChange={(e) => setText(e.target.value)}
         />
         <button>Enter</button>
       </form>
       <h2>LIST OF TODO</h2>
-      <div class="listOfTodo" data-testid="listOfTodo">
+      <div className="listOfTodo" data-testid="listOfTodo">
         {todos.map((todo) => (
           <div key={todo.id}>
             {todo.todo}
