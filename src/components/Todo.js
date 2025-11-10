@@ -34,7 +34,7 @@ const Todo = () => {
       <h2>LIST OF TODO</h2>
       <div className="listOfTodo" data-testid="listOfTodo">
         {todos.map((todo) => (
-          <div key={todo.id}>
+          <div className="renderedList" key={todo.id}>
             {todo.todo}
             <button onClick={() => removeTodo(todo.id)}>Remove</button>
           </div>

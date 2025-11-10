@@ -1,6 +1,5 @@
 import { render, screen, waitFor, within } from '@testing-library/react';
-//import user from '@testing-library/user-event';
-import userEvent from '@testing-library/user-event';
+import user from '@testing-library/user-event';
 import Todo from './Todo';
 
 /*Now, when my application loads, I want to see everything on the
@@ -22,15 +21,12 @@ test('App loads on page', () => {
 
 test('User types on page', async () => {
   render(<Todo />);
-  const list = screen.getByTestId('listOfTodo');
-  expect(
-    within(list).queryByText('I am a Billionaire')
-  ).not.toBeInTheDocument();
-  const input = screen.getByRole('textbox', { name: /add a todo/i });
-  userEvent.click(input);
-  userEvent.type(input, 'I am a Billionaire');
-  userEvent.click(screen.getByRole('button', { name: /enter/i }));
+  const labelText = screen.getByLabelText(/add a todo/i);
+  user.click(labelText);
+  user.keyboard('hello motor');
+  const button = screen.getByRole('button', { name: /enter/i });
+  user.click(button);
 
-  const todo = await within(list).findByText('I am a Billionaire');
-  expect(todo).toBeInTheDocument();
+  const listTodo = screen.getByTestId('listOfTodo');
+  expect(listTodo).toHaveTextContent('hello motor');
 });
