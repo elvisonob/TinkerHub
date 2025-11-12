@@ -15,12 +15,12 @@ const Todo = () => {
   const removeTodo = (ids) => {
     // when the button is clicked, that current todo should be removed
     setTodos((prev) => {
-      return prev.filter((todo) => todo.id !== ids);
+      return prev.map((todo) => todo.id !== ids);
     });
   };
   return (
     <div className="container">
-      <h1>TODO PAGE</h1>
+      <h1>TODOs PAGE </h1>
       <label htmlFor="todoList">Add a Todo</label>
       <form onSubmit={onSubmit}>
         <input

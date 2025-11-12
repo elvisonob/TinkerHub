@@ -50,6 +50,7 @@ test('Remove todo in page', async () => {
   userEvent.click(removeButton);
 
   // After clicking, the todo should be removed from page
+
   await waitFor(() =>
     expect(screen.queryByText('hello motor')).not.toBeInTheDocument()
   );
