@@ -15,7 +15,7 @@ const Todo = () => {
   const removeTodo = (ids) => {
     // when the button is clicked, that current todo should be removed
     setTodos((prev) => {
-      return prev.map((todo) => todo.id !== ids);
+      return prev.filter((todo) => todo.id !== ids);
     });
   };
   return (
@@ -32,7 +32,7 @@ const Todo = () => {
         <button>Enter</button>
       </form>
       <h2>LIST OF TODO</h2>
-      <div className="listOfTodo" data-testid="listOfTodo">
+      <div className="listOfTodos" data-testid="listOfTodo">
         {todos.map((todo) => (
           <div className="renderedList" key={todo.id}>
             {todo.todo}
