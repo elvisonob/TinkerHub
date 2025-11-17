@@ -37,6 +37,7 @@ test('user types and renders on page', async () => {
   await user.type(textInput, 'I am a GBP Billionaire');
   const enterButton = screen.getByRole('button', { name: /enter/i });
   await user.click(enterButton);
+  expect(textInput).toHaveValue('');
 
   expect(screen.getByText(/i am a gbp billionaire/i)).toBeInTheDocument();
 });
