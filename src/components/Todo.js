@@ -31,7 +31,7 @@ const Todo = () => {
         />
         <button>Enter</button>
       </form>
-      <h2>LIST OF TODO</h2>
+      <h2>TODO LIST</h2>
       <div className="listOfTodos" data-testid="listOfTodo">
         {todos.map((todo) => (
           <div className="renderedList" key={todo.id}>
