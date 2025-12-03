@@ -36,7 +36,7 @@ const Todo = () => {
         {todos.map((todo) => (
           <div className="renderedList" key={todo.id}>
             {todo.todo}
-            <button onClick={() => removeTodo(todo.id)}>Remove-Todo</button>
+            <button onClick={() => removeTodo(todo.id)}>Remove Todos</button>
           </div>
         ))}
       </div>
