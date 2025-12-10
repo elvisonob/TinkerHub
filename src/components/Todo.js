@@ -36,9 +36,7 @@ const Todo = () => {
         {todos.map((todo) => (
           <div className="renderedList" key={todo.id}>
             {todo.todo}
-            <button onClick={() => removeTodo(todo.id)}>
-              Code getting hotter
-            </button>
+            <button onClick={() => removeTodo(todo.id)}>I love coding</button>
           </div>
         ))}
       </div>
