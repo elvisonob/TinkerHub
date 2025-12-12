@@ -21,7 +21,7 @@ const Todo = () => {
   return (
     <div className="container">
       <h1>TODOs PAGE </h1>
-      <label htmlFor="todoList">Add Todo</label>
+      <label htmlFor="todoList">Include specific Todo</label>
       <form onSubmit={onSubmit}>
         <input
           id="todoList"
