@@ -13,7 +13,7 @@ const Todo = () => {
   };
 
   const removeTodo = (ids) => {
-    // when the button is clicked, that current todo should be removed
+    // when the button is clicked
     setTodos((prev) => {
       return prev.filter((todo) => todo.id !== ids);
     });
