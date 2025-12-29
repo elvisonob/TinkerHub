@@ -1,47 +1,29 @@
-import { useState } from 'react';
+/* Challenge 3: Create your own component
 
-const Todo = () => {
-  const [text, setText] = useState('');
-  const [todos, setTodos] = useState([]);
+Create a Modal component that:
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setTodos((prev) => {
-      return [{ id: Math.random(), todo: text }, ...prev];
-    });
-    setText('');
-  };
+wraps children inside .modal-box
 
-  const removeTodo = (ids) => {
-    // when the button is clicked
-    setTodos((prev) => {
-      return prev.filter((todo) => todo.id !== ids);
-    });
-  };
+adds a dark background .modal-bg
+
+Expected usage:
+
+<Modal>
+  <h3>Are you sure?</h3>
+  <button>Yes</button>
+</Modal>
+
+*/
+export default function App(){
   return (
-    <div className="container">
-      <h1>TODOs PAGE </h1>
-      <label htmlFor="todoList">Include Todo</label>
-      <form onSubmit={onSubmit}>
-        <input
-          id="todoList"
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button>Enter</button>
-      </form>
-      <h2>TODOs LIST</h2>
-      <div className="listOfTodos" data-testid="listOfTodo">
-        {todos.map((todo) => (
-          <div className="renderedList" key={todo.id}>
-            {todo.todo}
-            <button onClick={() => removeTodo(todo.id)}>Elimination</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+    <Modal className="modal-box"></Modal>
+  )
+}
 
-export default Todo;
+export default function styleComponent(props){
+  return (
+    <Modal>
+      {props.children}
+    </Modal>
+  )
+}
