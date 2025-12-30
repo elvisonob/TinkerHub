@@ -1,5 +1,5 @@
 import Todo from './components/Todo.js';
-import AreaChartComponent from './components/AreaChart';
+//import AreaChartComponent from './components/AreaChart';
 
 const App = () => {
   return (
