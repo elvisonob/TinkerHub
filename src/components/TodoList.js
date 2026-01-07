@@ -5,7 +5,7 @@ export default function TodoList({ todo, removeTodo }) {
       {todo.map((todoList) => (
         <div key={todoList.id}>
           <li>{todoList.text}</li>
-          <button onClick={() => removeTodo(todoList.id)}>Remove</button>
+          <button onClick={() => removeTodo(todoList.id)}>Remove Item</button>
         </div>
       ))}
     </div>
