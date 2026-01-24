@@ -1,8 +1,31 @@
-/* .btn {
-  background-color: #1976d2;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-} */
+.container {
+  display: grid;
+  grid-template: 'header header header' 100px 'leftMenu main rightMenu' 1fr 'footer footer footer' 200px / 200px 1fr 200px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.header {
+  background-color: red;
+  grid-area: header;
+}
+
+.leftMenu {
+  background-color: yellow;
+  grid-area: leftMenu;
+}
+
+.main {
+  background-color: green;
+  grid-area: main;
+}
+
+.rightMenu {
+  background-color: blue;
+  grid-area: rightMenu;
+}
+
+.footer {
+  background-color: pink;
+  grid-area: footer;
+}

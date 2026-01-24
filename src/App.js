@@ -1,11 +1,11 @@
 import Todo from './components/Todo.js';
 //import AreaChartComponent from './components/AreaChart';
-import Mui from './components/MUIfeature.js';
+import ReusableComponents from './components/ReusableComponents.js';
 
 const App = () => {
   return (
     <div>
-      <Mui />
+      <ReusableComponents />
     </div>
   );
 };
