@@ -1,11 +1,9 @@
-import Todo from './components/Todo.js';
-//import AreaChartComponent from './components/AreaChart';
-import ReusableComponents from './components/ReusableComponents.js';
+import MemoLearning from './components/MemoLearning';
 
 const App = () => {
   return (
     <div>
-      <ReusableComponents />
+      <MemoLearning />
     </div>
   );
 };
