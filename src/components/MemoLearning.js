@@ -1,9 +1,18 @@
 import dayjs from 'dayjs';
+import '../i18n';
 
-function MemoLearning() {
-  const today = dayjs().add(7, 'day').format('YYYY-MM-DD');
+import { useTranslation } from 'react-i18next';
 
-  return <h1>{today}</h1>;
+export default function MemoLearning() {
+  const { t, i18n } = useTranslation();
+
+  return (
+    <>
+      {/* {<h1>{t('welcome')}</h1>} */}
+      {<p>{t('welcome')}</p>}
+
+      <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+      <button onClick={() => i18n.changeLanguage('fr')}>FR</button>
+    </>
+  );
 }
-
-export default MemoLearning;
