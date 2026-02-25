@@ -1,26 +1,49 @@
-// 'https://jsonplaceholder.typicode.com/todos'
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { fetchTodos, addTodo } from './api/index.ts';
+import { useState } from 'react';
 
 const App = () => {
-  const { data, error, isLoading } = useQuery({
-    queryKey: ['todo'],
-    queryFn: () =>
-      fetch('https://jsonplaceholder.typicode.com/todos').then((res) =>
-        res.json(),
-      ),
+  const [title, setTitle] = useState('');
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['todos'],
+    queryFn: () => fetchTodos(),
   });
 
-  if (error) return <p>An error occured</p>;
-  if (isLoading) return <p>Loading...</p>;
+  const { mutateAsync: addTodoMutation } = useMutation({
+    mutationFn: addTodo,
+  });
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div>
-      {data.map((todo) => (
-        <div>
-          <h1>ID: {todo.id}</h1>
-          <h1>TITLE: {todo.title}</h1>
+      <div>
+        <input
+          type="text"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
+      >
+      {data?.map((todo) => (
+        <div key={todo.id}>
+          <button
+            onClick={async () => {
+              try {
+                await addTodoMutation({ title });
+                setTitle('');
+              } catch (e) {
+                console.log(e);
+              }
+            }}
+          >
+            Add todo
+          </button>
+          <h1>{todo.title}</h1>
+          
         </div>
       ))}
+      </div>
     </div>
   );
 };
