@@ -24,25 +24,24 @@ const App = () => {
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
-      >
-      {data?.map((todo) => (
-        <div key={todo.id}>
-          <button
-            onClick={async () => {
-              try {
-                await addTodoMutation({ title });
-                setTitle('');
-              } catch (e) {
-                console.log(e);
-              }
-            }}
-          >
-            Add todo
-          </button>
-          <h1>{todo.title}</h1>
-          
-        </div>
-      ))}
+
+        {data?.map((todo) => (
+          <div key={todo.id}>
+            <button
+              onClick={async () => {
+                try {
+                  await addTodoMutation({ title });
+                  setTitle('');
+                } catch (e) {
+                  console.log(e);
+                }
+              }}
+            >
+              Add todo
+            </button>
+            <h1>{todo.titles}</h1>
+          </div>
+        ))}
       </div>
     </div>
   );
