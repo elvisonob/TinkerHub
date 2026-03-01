@@ -1,55 +1,42 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchTodos, addTodo } from './api/index.ts';
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
 const App = () => {
-  const queryClient = useQueryClient();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  const [search, setSearch] = useState('');
-  const [title, setTitle] = useState('');
-
-  const { data: todos, isLoading } = useQuery({
-    queryFn: () => fetchTodos(search),
-    queryKey: ['todos', { search }],
-    staleTime: Infinity,
-    cacheTime: 0,
-  });
-
-  const { mutateAsync: addTodoMutation } = useMutation({
-    mutationFn: addTodo,
-    onSuccess: () => {
-      queryClient.invalidateQueries(['todos']);
-    },
-  });
-
-  if (isLoading) return <div>Loading...</div>;
-
+  const onSubmit = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    console.log(data);
+  };
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input
+        {...register('email', {
+          required: 'Email must be present',
+          pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+        })}
         type="text"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
+        placeholder="Email"
       />
-      <button
-        onClick={async () => {
-          try {
-            await addTodoMutation({ title });
-            setTitle('');
-          } catch (e) {
-            console.log(e);
-          }
-        }}
-      >
-        Add todo
-      </button>
-
-      {todos?.map((todo) => (
-        <div key={todo.id}>
-          <h1>{todo.title}</h1>
-        </div>
-      ))}
-    </div>
+      {errors.email && <p>{errors.email.message}</p>}
+      <input
+        {...register('password', {
+          required: 'Password must be added',
+          minLength: {
+            value: 8,
+            message: 'Password must have at least 8 characters',
+          },
+        })}
+        type="password"
+        placeholder="Password"
+      />
+      {errors.password && <p>{errors.password.message}</p>}
+      <button type="submit">{isSubmitting ? 'Loading...' : 'Submit'}</button>
+    </form>
   );
 };
 
