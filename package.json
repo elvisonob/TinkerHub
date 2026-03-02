@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.13.6",
     "dayjs": "^1.11.19",
     "highcharts": "^12.5.0",
     "highcharts-react-official": "^3.2.3",
