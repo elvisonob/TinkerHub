@@ -19,7 +19,7 @@ export default function MemoLearning() {
       })
       .then((res) => setData(res.data))
       .catch((err) => {
-        if (err.code === 'ERR_CANCELD') {
+        if (err.code === 'ERR_CANCELLED') {
           console.log('Axios request canceled');
         } else if (err.code === 'ECONNABORTED') {
           console.error('Timeout: request took too long');
