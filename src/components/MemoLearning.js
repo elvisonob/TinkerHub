@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function MemoLearning() {
   const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const [errors, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
