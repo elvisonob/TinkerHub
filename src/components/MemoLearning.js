@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 
 export default function MemoLearning() {
-  const [data, setData] = useState(null);
+  const [datas, setData] = useState(null);
   const [errors, setError] = useState(null);
 
   useEffect(() => {
