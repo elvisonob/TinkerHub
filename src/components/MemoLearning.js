@@ -35,7 +35,7 @@ export default function MemoLearning() {
   }, []);
   return (
     <>
-      <h1>Hiya</h1>
+      <h1>Hiya1</h1>
       {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <p>Loading..</p>}
     </>
   );
