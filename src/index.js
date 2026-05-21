@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
 import App from './App.js';
-import MemoLearning from './components/MemoLearning';
+import UseCallBack from './components/UseCallBack';
 import './index.css';
 
 const el = document.getElementById('root');
 
 const root = ReactDOM.createRoot(el);
 
-root.render(<>{<MemoLearning />}</>);
+root.render(<>{<UseCallBack />}</>);
