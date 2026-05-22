@@ -1,37 +1,39 @@
-import { useState, useMemo, useCallback } from 'react';
-import List from './List.js';
+import { useState, useEffect } from 'react';
+import Posts from './Posts';
+import Pagination from './Pagination';
+import axios from 'axios';
 
 export default function UseCallBack() {
-  const [number, setNumber] = useState(1);
-  const [dark, setDark] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
 
-  const getItems = useCallback(
-    (incrementor) => {
-      return [
-        number + incrementor,
-        number + 1 + incrementor,
-        number + 2 + incrementor,
-      ];
-    },
-    [number],
-  );
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      setPosts(res.data);
+      setLoading(false);
+    };
+    fetchPosts();
+  }, []);
 
-  const theme = {
-    backgroundColor: dark ? '#333' : '#FFF',
-    color: dark ? '#FFF' : '#333',
-  };
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
-    <div style={theme}>
-      <input
-        type="number"
-        value={number}
-        onChange={(e) => setNumber(parseInt(e.target.value))}
+    <div className="container">
+      <h1>My Blog</h1>
+      <Posts posts={currentPosts} loading={loading} />
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
       />
-      <button onClick={() => setDark((prevDark) => !prevDark)}>
-        Toggle theme
-      </button>
-      <List getItems={getItems} />
     </div>
   );
 }
