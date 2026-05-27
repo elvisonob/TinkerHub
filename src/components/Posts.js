@@ -1,9 +1,6 @@
 import React from 'react';
 
-const Posts = ({ loading, data }) => {
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+const Posts = ({ data }) => {
   return (
     <ul>
       {data.map((eachData) => (
