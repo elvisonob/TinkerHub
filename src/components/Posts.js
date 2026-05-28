@@ -1,12 +1,19 @@
 import React from 'react';
 
-const Posts = ({ data }) => {
+const Posts = ({ data, isLoading }) => {
+  if (isLoading) {
+    <p>Loading...</p>;
+  }
   return (
-    <ul>
-      {data.map((eachData) => (
-        <li key={eachData.title}>{eachData.title}</li>
-      ))}
-    </ul>
+    <div>
+      {
+        <ul>
+          {data.map((eachData) => (
+            <li key={eachData.title}>{eachData.title}</li>
+          ))}
+        </ul>
+      }
+    </div>
   );
 };
 
