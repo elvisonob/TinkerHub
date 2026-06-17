@@ -14,7 +14,7 @@ export default function useTimer(city) {
         );
 
         if (!data.ok) {
-          throw new Error('Failed to fetch time');
+          throw new Error('Failed to fetch');
         }
         const response = await data.json();
         const timer = response.dateTime.split('T')[1].split('.')[0];
